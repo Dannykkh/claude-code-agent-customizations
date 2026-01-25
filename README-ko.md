@@ -49,24 +49,33 @@ chmod +x install.sh && ./install.sh
 
 ### 커스텀 스킬 (슬래시 명령어)
 
-| 스킬 | 명령어 | 설명 |
-|------|--------|------|
-| docker-deploy | `/docker-deploy` | Docker 배포 환경 자동 구성 |
-| code-reviewer | `/code-reviewer` | 코드 리뷰 및 규제 준수 검사 |
-| react-best-practices | `/react-best-practices` | React 성능 최적화 규칙 |
-| web-design-guidelines | `/web-design-guidelines` | 웹 UI 접근성 및 UX 검토 |
+| 스킬 | 명령어 | 기술/기능 | 설명 |
+|------|--------|----------|------|
+| **docker-deploy** | `/docker-deploy` | Docker, docker-compose, Cython/PyArmor | Dockerfile (멀티스테이지), docker-compose.yml, 설치 스크립트(bat/sh) 자동 생성. Python 소스코드 보호 지원 |
+| **code-reviewer** | `/code-reviewer` | Python, TypeScript | 자동 코드 리뷰: 500줄 파일 제한, 50줄 함수 제한, 보안 취약점(SQL Injection, XSS), 타입 힌트, SRP/DRY 원칙 |
+| **react-best-practices** | `/react-best-practices` | React, Next.js | Vercel의 45개 최적화 규칙: 워터폴 제거, 번들 크기, 서버사이드 성능, 리렌더 최적화 |
+| **web-design-guidelines** | `/web-design-guidelines` | 접근성, UX | Web Interface Guidelines 기반 UI 준수 검토 (a11y, 사용성) |
+| **python-backend** | `/python-backend` | FastAPI, Pydantic, SQLAlchemy | Python 백엔드 모범 사례: 비동기 프로그래밍, 리포지토리 패턴, 서비스 레이어, 의존성 주입 |
+| **api-tester** | `/api-tester` | CORS, JWT, Proxy | 프론트엔드-백엔드 통합 테스트: 프록시 설정, 토큰 검증, 에러 응답 포맷 |
+| **erd-designer** | `/erd-designer` | Mermaid | Mermaid 형식 ERD 다이어그램 생성 |
 
 ### 커스텀 에이전트 (서브에이전트)
 
-| 에이전트 | 설명 |
-|---------|------|
-| api-tester | API 엔드포인트 테스트 및 연동 확인 |
-| code-reviewer | 코드 품질, 보안, 성능 검토 |
-| frontend-react | React 컴포넌트 분석 및 최적화 |
-| qa-engineer | QA 검증 및 회귀 테스트 |
-| qa-writer | 테스트 시나리오 및 테스트 케이스 작성 |
-| documentation | 기술 문서 자동 생성 |
-| migration-helper | 레거시 → 모던 스택 마이그레이션 가이드 |
+| 에이전트 | 기술 스택 | 설명 |
+|---------|----------|------|
+| **frontend-react** | React 18+, TypeScript, TanStack Query, Zustand, Tailwind CSS, Shadcn/UI | React 컴포넌트 분석, 상태 관리 (서버: React Query / 클라이언트: Zustand), Atomic Design 패턴 |
+| **backend-spring** | Java 21, Spring Boot 3.x, Spring Security, JPA/Hibernate, Redis | Clean Architecture, DDD, OpenAPI 3.0 기반 RESTful API 설계 |
+| **database-mysql** | MySQL 8.0, Flyway | 스키마 설계, 쿼리 최적화, 인덱싱 전략, 멀티테넌트 아키텍처 |
+| **ai-ml** | Python 3.11, FastAPI, LangChain, Claude/OpenAI API, Milvus/Qdrant | LLM 통합, RAG 검색 시스템, 문서 분석, 임베딩 서비스 |
+| **api-tester** | curl, REST/GraphQL | API 엔드포인트 테스트, 인증 테스트, 응답 검증 |
+| **code-reviewer** | - | 코드 품질(SRP, DRY), 보안 취약점, 성능 검토 |
+| **qa-engineer** | JUnit, Jest, pytest, Playwright, Cypress, k6 | 테스트 전략, 품질 검증, 회귀 테스트 |
+| **qa-writer** | - | 테스트 시나리오 작성 (Smoke/Functional/Regression/Edge Case/Performance) |
+| **documentation** | - | PRD, API 문서(OpenAPI), IMPLEMENTATION.md, CHANGELOG, ADR 템플릿 |
+| **migration-helper** | - | 레거시(Template + jQuery) → 모던(REST API + React SPA) 마이그레이션 패턴 |
+| **explore-agent** | - | 신규 기능 구현 전 레거시 코드 분석 |
+| **feature-tracker** | - | 프로젝트 기능 진행률 추적 및 시각화 |
+| **api-comparator** | - | 레거시 vs 신규 API 호환성 검증, 마이그레이션 타임라인 계획 |
 
 ### 명령어 & 스크립트
 
@@ -78,6 +87,10 @@ chmod +x install.sh && ./install.sh
 | `/write-prd` | PRD (제품 요구사항 문서) 작성 |
 | `/test` | 테스트 실행 및 커버리지 보고서 |
 | `/review` | 코드 리뷰 수행 |
+| `/migrate` | 마이그레이션 작업 실행 |
+| `/generate` | 코드 템플릿 생성 |
+| `/daily-sync` | 일일 동기화 및 상태 확인 |
+| `/update-docs` | 문서 파일 업데이트 |
 
 ### 훅
 
@@ -118,28 +131,38 @@ chmod +x install.sh && ./install.sh
 ```
 claude-code-customizations/
 ├── skills/                    # 커스텀 스킬 (슬래시 명령어)
-│   ├── docker-deploy/
-│   ├── code-reviewer/
-│   ├── react-best-practices/
-│   ├── web-design-guidelines/
-│   ├── api-tester/
-│   ├── erd-designer/
-│   └── python-backend/
+│   ├── docker-deploy/         # Docker 배포 (Cython/PyArmor 지원)
+│   ├── code-reviewer/         # 자동 코드 리뷰 (500줄 제한, 보안)
+│   ├── react-best-practices/  # Vercel의 45개 React 최적화 규칙
+│   ├── web-design-guidelines/ # UI/UX 접근성 검토
+│   ├── api-tester/            # 프론트-백엔드 통합 테스트
+│   ├── erd-designer/          # Mermaid ERD 생성
+│   └── python-backend/        # FastAPI 모범 사례
 ├── agents/                    # 커스텀 서브에이전트
-│   ├── api-tester.md
-│   ├── code-reviewer.md
-│   ├── frontend-react.md
-│   ├── qa-engineer.md
-│   ├── qa-writer.md
-│   ├── documentation.md
-│   └── migration-helper.md
+│   ├── frontend-react.md      # React + Zustand + TanStack Query
+│   ├── backend-spring.md      # Java 21 + Spring Boot 3.x
+│   ├── database-mysql.md      # MySQL 8.0 + Flyway
+│   ├── ai-ml.md               # LLM + RAG + Vector DB
+│   ├── api-tester.md          # REST/GraphQL API 테스트
+│   ├── code-reviewer.md       # 코드 품질 및 보안 검토
+│   ├── qa-engineer.md         # 테스트 전략 및 실행
+│   ├── qa-writer.md           # 테스트 케이스 작성
+│   ├── documentation.md       # PRD, API 문서, CHANGELOG
+│   ├── migration-helper.md    # 레거시 → 모던 마이그레이션
+│   ├── explore-agent.md       # 레거시 코드 분석
+│   ├── feature-tracker.md     # 기능 진행률 추적
+│   └── api-comparator.md      # API 호환성 검증
 ├── commands/                  # 슬래시 명령어 & 스크립트
 │   ├── check-todos.md
 │   ├── write-api-docs.md
 │   ├── write-changelog.md
 │   ├── write-prd.md
 │   ├── test.md
-│   └── review.md
+│   ├── review.md
+│   ├── migrate.md
+│   ├── generate.md
+│   ├── daily-sync.md
+│   └── update-docs.md
 ├── hooks/                     # 훅 스크립트
 │   ├── protect-files.sh
 │   ├── format-code.sh
