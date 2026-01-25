@@ -49,24 +49,33 @@ chmod +x install.sh && ./install.sh
 
 ### Custom Skills (Slash Commands)
 
-| Skill | Command | Description |
-|-------|---------|-------------|
-| docker-deploy | `/docker-deploy` | Docker deployment environment setup |
-| code-reviewer | `/code-reviewer` | Code review with compliance checks |
-| react-best-practices | `/react-best-practices` | React performance optimization rules |
-| web-design-guidelines | `/web-design-guidelines` | Web UI accessibility and UX review |
+| Skill | Command | Tech/Features | Description |
+|-------|---------|---------------|-------------|
+| **docker-deploy** | `/docker-deploy` | Docker, docker-compose, Cython/PyArmor | Auto-generate Dockerfile (multi-stage), docker-compose.yml, install scripts (bat/sh). Supports source code protection for Python |
+| **code-reviewer** | `/code-reviewer` | Python, TypeScript | Auto code review: 500-line file limit, 50-line function limit, security vulnerabilities (SQL injection, XSS), type hints, SRP/DRY principles |
+| **react-best-practices** | `/react-best-practices` | React, Next.js | Vercel's 45 optimization rules: waterfall elimination, bundle size, server-side performance, re-render optimization |
+| **web-design-guidelines** | `/web-design-guidelines` | Accessibility, UX | UI compliance review against Web Interface Guidelines (a11y, usability) |
+| **python-backend** | `/python-backend` | FastAPI, Pydantic, SQLAlchemy | Python backend best practices: async programming, repository pattern, service layer, dependency injection |
+| **api-tester** | `/api-tester` | CORS, JWT, Proxy | Frontend-backend integration testing: proxy configuration, token validation, error response format |
+| **erd-designer** | `/erd-designer` | Mermaid | Generate ERD diagrams in Mermaid format |
 
 ### Custom Agents (Subagents)
 
-| Agent | Description |
-|-------|-------------|
-| api-tester | API endpoint testing and validation |
-| code-reviewer | Code quality, security, and performance review |
-| frontend-react | React component analysis and optimization |
-| qa-engineer | QA verification and regression testing |
-| qa-writer | Test scenario and test case writing |
-| documentation | Technical documentation generation |
-| migration-helper | Legacy to modern stack migration guide |
+| Agent | Tech Stack | Description |
+|-------|------------|-------------|
+| **frontend-react** | React 18+, TypeScript, TanStack Query, Zustand, Tailwind CSS, Shadcn/UI | React component analysis, state management (Server: React Query / Client: Zustand), Atomic Design patterns |
+| **backend-spring** | Java 21, Spring Boot 3.x, Spring Security, JPA/Hibernate, Redis | Clean Architecture, DDD, RESTful API design with OpenAPI 3.0 |
+| **database-mysql** | MySQL 8.0, Flyway | Schema design, query optimization, indexing strategies, multi-tenant architecture |
+| **ai-ml** | Python 3.11, FastAPI, LangChain, Claude/OpenAI API, Milvus/Qdrant | LLM integration, RAG search systems, document analysis, embedding services |
+| **api-tester** | curl, REST/GraphQL | API endpoint testing, authentication testing, response validation |
+| **code-reviewer** | - | Code quality (SRP, DRY), security vulnerabilities, performance review |
+| **qa-engineer** | JUnit, Jest, pytest, Playwright, Cypress, k6 | Test strategy, quality verification, regression testing |
+| **qa-writer** | - | Test scenario writing (Smoke/Functional/Regression/Edge Case/Performance) |
+| **documentation** | - | PRD, API docs (OpenAPI), IMPLEMENTATION.md, CHANGELOG, ADR templates |
+| **migration-helper** | - | Legacy (Template + jQuery) → Modern (REST API + React SPA) migration patterns |
+| **explore-agent** | - | Legacy code analysis before new feature implementation (Korean) |
+| **feature-tracker** | - | Project feature tracking with progress visualization (Korean) |
+| **api-comparator** | - | Legacy vs New API compatibility verification, migration timeline planning |
 
 ### Commands & Scripts
 
@@ -78,6 +87,10 @@ chmod +x install.sh && ./install.sh
 | `/write-prd` | Write Product Requirements Document |
 | `/test` | Run tests and generate coverage report |
 | `/review` | Perform code review |
+| `/migrate` | Execute migration tasks |
+| `/generate` | Generate code templates |
+| `/daily-sync` | Daily sync and status check |
+| `/update-docs` | Update documentation files |
 
 ### Hooks
 
@@ -118,28 +131,38 @@ chmod +x install.sh && ./install.sh
 ```
 claude-code-customizations/
 ├── skills/                    # Custom skills (slash commands)
-│   ├── docker-deploy/
-│   ├── code-reviewer/
-│   ├── react-best-practices/
-│   ├── web-design-guidelines/
-│   ├── api-tester/
-│   ├── erd-designer/
-│   └── python-backend/
+│   ├── docker-deploy/         # Docker deployment (Cython/PyArmor support)
+│   ├── code-reviewer/         # Auto code review (500-line limit, security)
+│   ├── react-best-practices/  # Vercel's 45 React optimization rules
+│   ├── web-design-guidelines/ # UI/UX accessibility review
+│   ├── api-tester/            # Frontend-backend integration testing
+│   ├── erd-designer/          # Mermaid ERD generation
+│   └── python-backend/        # FastAPI best practices
 ├── agents/                    # Custom subagents
-│   ├── api-tester.md
-│   ├── code-reviewer.md
-│   ├── frontend-react.md
-│   ├── qa-engineer.md
-│   ├── qa-writer.md
-│   ├── documentation.md
-│   └── migration-helper.md
+│   ├── frontend-react.md      # React + Zustand + TanStack Query
+│   ├── backend-spring.md      # Java 21 + Spring Boot 3.x
+│   ├── database-mysql.md      # MySQL 8.0 + Flyway
+│   ├── ai-ml.md               # LLM + RAG + Vector DB
+│   ├── api-tester.md          # REST/GraphQL API testing
+│   ├── code-reviewer.md       # Code quality & security review
+│   ├── qa-engineer.md         # Test strategy & execution
+│   ├── qa-writer.md           # Test case writing
+│   ├── documentation.md       # PRD, API docs, CHANGELOG
+│   ├── migration-helper.md    # Legacy → Modern migration
+│   ├── explore-agent.md       # Legacy code analysis (Korean)
+│   ├── feature-tracker.md     # Feature progress tracking (Korean)
+│   └── api-comparator.md      # API compatibility verification
 ├── commands/                  # Slash commands & scripts
 │   ├── check-todos.md
 │   ├── write-api-docs.md
 │   ├── write-changelog.md
 │   ├── write-prd.md
 │   ├── test.md
-│   └── review.md
+│   ├── review.md
+│   ├── migrate.md
+│   ├── generate.md
+│   ├── daily-sync.md
+│   └── update-docs.md
 ├── hooks/                     # Hook scripts
 │   ├── protect-files.sh
 │   ├── format-code.sh
