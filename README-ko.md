@@ -124,6 +124,10 @@ chmod +x install.sh && ./install.sh
 | [Playwright](https://github.com/microsoft/playwright-mcp) | 브라우저 자동화 | `claude mcp add playwright -- npx -y @playwright/mcp@latest` |
 | [Stitch](https://github.com/anthropics/stitch-mcp) | Google Stitch UI 디자인 | `npx -p stitch-mcp-auto stitch-mcp-auto-setup` |
 | [GitHub](https://github.com/github/github-mcp-server) | GitHub API 접근 | `claude mcp add github -- npx -y @modelcontextprotocol/server-github` |
+| **[Canva](https://www.canva.com/help/mcp-agent-setup/)** | Canva AI로 디자인 & 프레젠테이션 | `claude mcp add canva -- npx -y @canva/mcp-server` |
+| [Google Slides](https://github.com/matteoantoci/google-slides-mcp) | Google Slides 자동화 | `npx -y google-slides-mcp` |
+| [SlideSpeak](https://slidespeak.co) | AI PowerPoint 생성 | `claude mcp add slidespeak -- npx -y @slidespeak/mcp` |
+| [PowerPoint](https://github.com/socamalo/PPT_MCP_Server) | PowerPoint 직접 제어 | `pip install ppt-mcp-server` |
 
 ---
 
