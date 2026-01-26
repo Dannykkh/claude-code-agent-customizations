@@ -256,6 +256,7 @@ When asked to implement AI features:
 
 ## Key Reminders
 
+- Always use the latest available model version as of today's date (check official documentation for current model IDs)
 - Always include tenant_id in vector searches
 - Handle token limits gracefully
 - Use background tasks for embedding generation
