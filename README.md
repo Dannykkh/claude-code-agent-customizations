@@ -125,10 +125,15 @@ chmod +x install.sh && ./install.sh
 | [Playwright](https://github.com/microsoft/playwright-mcp) | Browser automation | `claude mcp add playwright -- npx -y @playwright/mcp@latest` |
 | [Stitch](https://github.com/anthropics/stitch-mcp) | Google Stitch UI design | `npx -p stitch-mcp-auto stitch-mcp-auto-setup` |
 | [GitHub](https://github.com/github/github-mcp-server) | GitHub API access | `claude mcp add github -- npx -y @modelcontextprotocol/server-github` |
-| **[Canva](https://www.canva.com/help/mcp-agent-setup/)** | Design & presentation with Canva AI | `claude mcp add canva -- npx -y @canva/mcp-server` |
-| [Google Slides](https://github.com/matteoantoci/google-slides-mcp) | Google Slides automation | `npx -y google-slides-mcp` |
-| [SlideSpeak](https://slidespeak.co) | AI PowerPoint generation | `claude mcp add slidespeak -- npx -y @slidespeak/mcp` |
-| [PowerPoint](https://github.com/socamalo/PPT_MCP_Server) | Native PowerPoint control | `pip install ppt-mcp-server` |
+
+**Free & Local (No API Key):**
+
+| MCP | Description | Install |
+|-----|-------------|---------|
+| **[Office-PowerPoint-MCP](https://github.com/GongRzhe/Office-PowerPoint-MCP-Server)** | PPT automation (32 tools, 25 templates) | `pip install office-powerpoint-mcp-server` |
+| [mcp-pandoc](https://github.com/vivekVells/mcp-pandoc) | Document conversion (MD→PDF/DOCX) | `pip install mcp-pandoc` |
+| [manim-mcp](https://github.com/abhiemj/manim-mcp-server) | Math/education animations | Manim + local server |
+| [blender-mcp](https://github.com/ahujasid/blender-mcp) | 3D modeling & animation | Blender + local server |
 
 ---
 
