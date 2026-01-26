@@ -198,6 +198,7 @@ SHOW PROCESSLIST;
 
 ## Key Reminders
 
+- Always use the latest stable MySQL version syntax and features as of today's date
 - Always use InnoDB engine
 - Use utf8mb4 for full Unicode support
 - Index foreign key columns
