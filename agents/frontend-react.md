@@ -174,6 +174,7 @@ When implementing:
 
 ## Key Reminders
 
+- Always use the latest stable versions of React, TypeScript, and related libraries as of today's date
 - Always use TypeScript strict mode
 - Implement loading skeletons
 - Handle empty states

@@ -219,6 +219,7 @@ src/main/java/com/example/
 
 ## Key Reminders
 
+- Always use the latest LTS version of Java and latest stable Spring Boot version as of today's date
 - Always use DTOs, never expose entities directly
 - Apply @Transactional at service layer
 - Validate input with @Valid
