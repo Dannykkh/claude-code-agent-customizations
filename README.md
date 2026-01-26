@@ -59,6 +59,7 @@ chmod +x install.sh && ./install.sh
 | **api-tester** | `/api-tester` | CORS, JWT, Proxy | Frontend-backend integration testing: proxy configuration, token validation, error response format |
 | **erd-designer** | `/erd-designer` | Mermaid | Generate ERD diagrams in Mermaid format |
 | **humanizer** | `/humanizer` | Writing | Remove AI writing patterns to make text sound natural and human-written. Based on Wikipedia's "Signs of AI writing" guide (24 patterns) |
+| **ppt-generator** | `/ppt-generator` | python-pptx, PowerPoint | Generate professional PPT from templates. Supports Markdown/JSON input, charts, tables, images |
 
 ### Custom Agents (Subagents)
 
@@ -143,6 +144,7 @@ claude-code-customizations/
 │   ├── api-tester/            # Frontend-backend integration testing
 │   ├── erd-designer/          # Mermaid ERD generation
 │   ├── humanizer/             # AI writing pattern removal (24 patterns)
+│   ├── ppt-generator/         # PowerPoint generation from templates
 │   └── python-backend/        # FastAPI best practices
 ├── agents/                    # Custom subagents
 │   ├── frontend-react.md      # React + Zustand + TanStack Query
