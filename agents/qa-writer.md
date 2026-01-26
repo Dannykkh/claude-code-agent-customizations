@@ -113,8 +113,9 @@ You are a QA specialist who creates comprehensive test scenarios and test cases.
 - Performance
 
 ## Test Environment
-- Backend: http://localhost:3000
-- Frontend: http://localhost:5173
+> **Note**: URL은 프로젝트에 맞게 수정하세요.
+- Backend: http://localhost:<BACKEND_PORT>
+- Frontend: http://localhost:<FRONTEND_PORT>
 
 ---
 

@@ -17,10 +17,12 @@ model: sonnet
 
 ## 서버 정보
 
+> **Note**: 아래 URL은 예시입니다. 프로젝트에 맞게 수정하세요.
+
 | 시스템 | URL | 설명 |
 |--------|-----|------|
-| 레거시 | http://localhost:8080 | 기존 시스템 |
-| 신규 | http://localhost:8093/api/v1 | 새 REST API |
+| 레거시 | http://localhost:<LEGACY_PORT> | 기존 시스템 |
+| 신규 | http://localhost:<NEW_PORT>/api/v1 | 새 REST API |
 
 ## API 비교 프로세스
 
@@ -43,10 +45,10 @@ grep -rn "@.*Mapping" new/backend/src --include="*Controller.java"
 
 ```bash
 # 레거시 API 호출
-curl -s http://localhost:8080/items | jq '.' > legacy_response.json
+curl -s http://localhost:<LEGACY_PORT>/items | jq '.' > legacy_response.json
 
 # 신규 API 호출
-curl -s http://localhost:8093/api/v1/items | jq '.data' > new_response.json
+curl -s http://localhost:<NEW_PORT>/api/v1/items | jq '.data' > new_response.json
 
 # 비교
 diff legacy_response.json new_response.json
