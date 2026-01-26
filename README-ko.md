@@ -228,6 +228,23 @@ mkdir skills/my-skill
 
 ## 참고 리소스
 
+### 스킬 디렉토리
+
+| 리소스 | 설명 | 링크 |
+|--------|------|------|
+| **skills.sh** | Vercel의 25K+ 스킬 디렉토리 (설치: `npx skills add <owner/repo>`) | [skills.sh](https://skills.sh/) |
+
+**인기 스킬 (설치 수 기준):**
+| 스킬 | 설치 수 | 설명 |
+|------|--------|------|
+| vercel-react-best-practices | 50.3K | React 개발 가이드 |
+| web-design-guidelines | 38.2K | 웹 디자인 원칙 |
+| remotion-best-practices | 34.4K | Remotion 비디오 프레임워크 |
+| frontend-design | 15.3K | 프론트엔드 아키텍처 |
+| supabase-postgres-best-practices | 4.4K | 데이터베이스 패턴 |
+
+### 커뮤니티 프로젝트
+
 | 프로젝트 | 설명 | 링크 |
 |---------|------|------|
 | awesome-claude-code-subagents | 100+ 전문 서브에이전트 | [GitHub](https://github.com/VoltAgent/awesome-claude-code-subagents) |

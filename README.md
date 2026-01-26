@@ -228,6 +228,23 @@ mkdir skills/my-skill
 
 ## Related Resources
 
+### Skills Directory
+
+| Resource | Description | Link |
+|----------|-------------|------|
+| **skills.sh** | 25K+ skills directory by Vercel (install: `npx skills add <owner/repo>`) | [skills.sh](https://skills.sh/) |
+
+**Popular Skills (by installs):**
+| Skill | Installs | Description |
+|-------|----------|-------------|
+| vercel-react-best-practices | 50.3K | React development guide |
+| web-design-guidelines | 38.2K | Web design principles |
+| remotion-best-practices | 34.4K | Remotion video framework |
+| frontend-design | 15.3K | Frontend architecture |
+| supabase-postgres-best-practices | 4.4K | Database patterns |
+
+### Community Projects
+
 | Project | Description | Link |
 |---------|-------------|------|
 | awesome-claude-code-subagents | 100+ specialized subagents | [GitHub](https://github.com/VoltAgent/awesome-claude-code-subagents) |
