@@ -58,6 +58,7 @@ chmod +x install.sh && ./install.sh
 | **python-backend** | `/python-backend` | FastAPI, Pydantic, SQLAlchemy | Python backend best practices: async programming, repository pattern, service layer, dependency injection |
 | **api-tester** | `/api-tester` | CORS, JWT, Proxy | Frontend-backend integration testing: proxy configuration, token validation, error response format |
 | **erd-designer** | `/erd-designer` | Mermaid | Generate ERD diagrams in Mermaid format |
+| **humanizer** | `/humanizer` | Writing | Remove AI writing patterns to make text sound natural and human-written. Based on Wikipedia's "Signs of AI writing" guide (24 patterns) |
 
 ### Custom Agents (Subagents)
 
@@ -137,6 +138,7 @@ claude-code-customizations/
 │   ├── web-design-guidelines/ # UI/UX accessibility review
 │   ├── api-tester/            # Frontend-backend integration testing
 │   ├── erd-designer/          # Mermaid ERD generation
+│   ├── humanizer/             # AI writing pattern removal (24 patterns)
 │   └── python-backend/        # FastAPI best practices
 ├── agents/                    # Custom subagents
 │   ├── frontend-react.md      # React + Zustand + TanStack Query
@@ -231,4 +233,4 @@ MIT License
 
 ---
 
-**Last Updated:** 2026-01-25
+**Last Updated:** 2026-01-26

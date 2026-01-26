@@ -58,6 +58,7 @@ chmod +x install.sh && ./install.sh
 | **python-backend** | `/python-backend` | FastAPI, Pydantic, SQLAlchemy | Python 백엔드 모범 사례: 비동기 프로그래밍, 리포지토리 패턴, 서비스 레이어, 의존성 주입 |
 | **api-tester** | `/api-tester` | CORS, JWT, Proxy | 프론트엔드-백엔드 통합 테스트: 프록시 설정, 토큰 검증, 에러 응답 포맷 |
 | **erd-designer** | `/erd-designer` | Mermaid | Mermaid 형식 ERD 다이어그램 생성 |
+| **humanizer** | `/humanizer` | Writing | AI가 쓴 티 나는 글을 자연스럽게 수정. Wikipedia "Signs of AI writing" 기반 (24개 패턴) |
 
 ### 커스텀 에이전트 (서브에이전트)
 
@@ -137,6 +138,7 @@ claude-code-customizations/
 │   ├── web-design-guidelines/ # UI/UX 접근성 검토
 │   ├── api-tester/            # 프론트-백엔드 통합 테스트
 │   ├── erd-designer/          # Mermaid ERD 생성
+│   ├── humanizer/             # AI 글쓰기 패턴 제거 (24개 패턴)
 │   └── python-backend/        # FastAPI 모범 사례
 ├── agents/                    # 커스텀 서브에이전트
 │   ├── frontend-react.md      # React + Zustand + TanStack Query
@@ -231,4 +233,4 @@ MIT License
 
 ---
 
-**최종 업데이트:** 2026-01-25
+**최종 업데이트:** 2026-01-26
