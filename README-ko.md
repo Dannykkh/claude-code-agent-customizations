@@ -59,6 +59,7 @@ chmod +x install.sh && ./install.sh
 | **api-tester** | `/api-tester` | CORS, JWT, Proxy | 프론트엔드-백엔드 통합 테스트: 프록시 설정, 토큰 검증, 에러 응답 포맷 |
 | **erd-designer** | `/erd-designer` | Mermaid | Mermaid 형식 ERD 다이어그램 생성 |
 | **humanizer** | `/humanizer` | Writing | AI가 쓴 티 나는 글을 자연스럽게 수정. Wikipedia "Signs of AI writing" 기반 (24개 패턴) |
+| **ppt-generator** | `/ppt-generator` | python-pptx, PowerPoint | 템플릿 기반 전문 PPT 생성. 마크다운/JSON 입력, 차트/표/이미지 지원 |
 
 ### 커스텀 에이전트 (서브에이전트)
 
@@ -143,6 +144,7 @@ claude-code-customizations/
 │   ├── api-tester/            # 프론트-백엔드 통합 테스트
 │   ├── erd-designer/          # Mermaid ERD 생성
 │   ├── humanizer/             # AI 글쓰기 패턴 제거 (24개 패턴)
+│   ├── ppt-generator/         # 템플릿 기반 PPT 생성
 │   └── python-backend/        # FastAPI 모범 사례
 ├── agents/                    # 커스텀 서브에이전트
 │   ├── frontend-react.md      # React + Zustand + TanStack Query
