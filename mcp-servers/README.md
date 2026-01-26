@@ -228,8 +228,8 @@ claude mcp add filesystem -- npx -y @anthropic-ai/mcp-server-filesystem /path/to
       "args": [
         "-y",
         "@anthropic-ai/mcp-server-filesystem",
-        "D:\\projects",
-        "D:\\data"
+        "/path/to/your/projects",
+        "/path/to/your/data"
       ]
     }
   }
@@ -410,7 +410,7 @@ npm run build
       "args": [
         "-y",
         "@anthropic-ai/mcp-server-filesystem",
-        "D:\\projects"
+        "/path/to/your/projects"
       ]
     },
     "github": {

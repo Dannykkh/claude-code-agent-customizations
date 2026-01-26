@@ -7,7 +7,7 @@ description: API 연동 테스트 스킬. 프론트-백엔드 통신 검증, 프
 
 ## 테스트 항목
 - [ ] CORS 설정
-- [ ] 프록시 경로 (`/api/*` → `http://localhost:8000`)
+- [ ] 프록시 경로 (`/api/*` → `http://localhost:<BACKEND_PORT>`)
 - [ ] JWT 토큰 전달
 - [ ] 에러 응답 포맷
 - [ ] 파일 업로드 (multipart/form-data)

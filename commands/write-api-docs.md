@@ -84,7 +84,7 @@ FastAPI 라우터를 분석하여 API 문서를 자동 생성합니다.
 
 #### cURL
 ```bash
-curl -X GET "http://localhost:8000/api/v1/users/search?search=john&version=1.0" \
+curl -X GET "http://localhost:<API_PORT>/api/v1/users/search?search=john&version=1.0" \
   -H "X-API-Key: your-api-key"
 ```
 
@@ -93,7 +93,7 @@ curl -X GET "http://localhost:8000/api/v1/users/search?search=john&version=1.0" 
 import httpx
 
 response = httpx.get(
-    "http://localhost:8000/api/v1/users/search",
+    "http://localhost:<API_PORT>/api/v1/users/search",
     params={"search": "john", "version": "1.0"},
     headers={"X-API-Key": "your-api-key"}
 )

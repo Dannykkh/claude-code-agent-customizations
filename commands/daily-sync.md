@@ -67,9 +67,10 @@ npm run test --silent
 
 ### 4. 서버 상태 확인
 ```bash
+# Note: 포트 번호는 프로젝트에 맞게 수정하세요
 echo "=== 서버 상태 ==="
-curl -s http://localhost:8093/actuator/health | jq '.status'
-curl -s http://localhost:8110 > /dev/null && echo "Frontend: OK" || echo "Frontend: DOWN"
+curl -s http://localhost:<BACKEND_PORT>/actuator/health | jq '.status'
+curl -s http://localhost:<FRONTEND_PORT> > /dev/null && echo "Frontend: OK" || echo "Frontend: DOWN"
 ```
 
 ## 출력 형식
@@ -96,8 +97,8 @@ curl -s http://localhost:8110 > /dev/null && echo "Frontend: OK" || echo "Fronte
 ### 서버 상태
 | 서버 | 포트 | 상태 |
 |------|------|------|
-| Backend | 8093 | 🟢 Running |
-| Frontend | 8110 | 🟢 Running |
+| Backend | <BACKEND_PORT> | 🟢 Running |
+| Frontend | <FRONTEND_PORT> | 🟢 Running |
 
 ## 📈 진행 현황
 
