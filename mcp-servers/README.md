@@ -322,6 +322,261 @@ User: /stitch:design-flow 로그인 → 대시보드 플로우 생성해줘
 
 ---
 
+### 8. Canva MCP - 디자인 & 프레젠테이션 (⭐ 추천)
+
+[Canva MCP](https://www.canva.com/help/mcp-agent-setup/)는 Canva 공식 MCP 서버로, AI 어시스턴트에서 직접 디자인을 생성하고 관리할 수 있습니다.
+
+**기능:**
+- Canva AI로 디자인 생성
+- 템플릿 자동 채우기 (Autofill)
+- 기존 디자인 검색 및 수정
+- PDF/이미지로 내보내기
+- 브랜드 일관성 유지
+
+**설치:**
+
+Canva 개발자 포털에서 API 키 발급 후:
+
+```bash
+claude mcp add canva -- npx -y @canva/mcp-server
+```
+
+**수동 설정:**
+
+```json
+{
+  "mcpServers": {
+    "canva": {
+      "command": "npx",
+      "args": ["-y", "@canva/mcp-server"],
+      "env": {
+        "CANVA_API_KEY": "your_canva_api_key"
+      }
+    }
+  }
+}
+```
+
+**사용법:**
+
+```
+User: Canva로 마케팅 프레젠테이션 만들어줘
+User: 이 데이터로 인포그래픽 생성해줘
+User: 내 브랜드 스타일로 소셜 미디어 포스트 만들어줘
+```
+
+**참고:** [Canva MCP Setup Guide](https://www.canva.com/help/mcp-agent-setup/) | [Canva Dev MCP Docs](https://www.canva.dev/docs/apps/mcp-server/)
+
+---
+
+### 9. PowerPoint MCP - PPT 자동화
+
+[PowerPoint MCP](https://github.com/socamalo/PPT_MCP_Server)는 Microsoft PowerPoint를 직접 제어하는 MCP 서버입니다.
+
+**기능:**
+- 프레젠테이션 생성 및 수정
+- 슬라이드 추가/삭제/편집
+- 텍스트, 이미지, 차트 삽입
+- 네이티브 .pptx 파일 생성
+
+**설치:**
+
+```bash
+# Python 패키지 설치
+pip install ppt-mcp-server
+
+# 또는 직접 클론
+git clone https://github.com/socamalo/PPT_MCP_Server
+cd PPT_MCP_Server
+pip install -r requirements.txt
+```
+
+**설정:**
+
+```json
+{
+  "mcpServers": {
+    "powerpoint": {
+      "command": "python",
+      "args": ["-m", "ppt_mcp_server"]
+    }
+  }
+}
+```
+
+**사용법:**
+
+```
+User: 분기별 실적 보고서 PPT 만들어줘
+User: 이 슬라이드에 차트 추가해줘
+User: 회사 템플릿으로 프레젠테이션 생성해줘
+```
+
+**참고:** [PPT MCP Server GitHub](https://github.com/socamalo/PPT_MCP_Server) | [Playbooks.com Guide](https://playbooks.com/mcp/socamalo-powerpoint)
+
+---
+
+### 10. Google Slides MCP - 슬라이드 자동화
+
+[Google Slides MCP](https://github.com/matteoantoci/google-slides-mcp)는 Google Slides API를 통해 프레젠테이션을 생성하고 수정하는 MCP 서버입니다.
+
+**기능:**
+- 프레젠테이션 생성 (`create_presentation`)
+- 프레젠테이션 조회 (`get_presentation`)
+- 배치 업데이트 (`batch_update_presentation`)
+- 텍스트, 도형, 이미지, 슬라이드 추가
+
+**설치:**
+
+```bash
+# npm 방식
+npm install -g google-slides-mcp
+```
+
+**설정:**
+
+Google Cloud Console에서 OAuth 자격증명 설정 후:
+
+```json
+{
+  "mcpServers": {
+    "google-slides": {
+      "command": "npx",
+      "args": ["-y", "google-slides-mcp"],
+      "env": {
+        "GOOGLE_CLIENT_ID": "your_client_id",
+        "GOOGLE_CLIENT_SECRET": "your_client_secret"
+      }
+    }
+  }
+}
+```
+
+**사용법:**
+
+```
+User: Google Slides로 새 프레젠테이션 만들어줘
+User: 이 마크다운 내용으로 슬라이드 생성해줘
+User: 기존 프레젠테이션에 새 슬라이드 추가해줘
+```
+
+**참고:** [google-slides-mcp GitHub](https://github.com/matteoantoci/google-slides-mcp) | [Zapier Google Slides MCP](https://zapier.com/mcp/google-slides)
+
+---
+
+### 11. SlideSpeak MCP - AI 프레젠테이션 생성
+
+[SlideSpeak MCP](https://slidespeak.co/blog/2025/07/21/create-ai-presentations-in-claude-using-mcp)는 전문적인 PowerPoint 프레젠테이션을 AI로 생성하는 리모트 MCP 서비스입니다.
+
+**기능:**
+- 자연어로 PPT 생성
+- 전문 디자인 템플릿 적용
+- 네이티브 .pptx 파일 출력
+- 복잡한 설정 없이 바로 사용
+
+**설치:**
+
+```bash
+claude mcp add slidespeak -- npx -y @slidespeak/mcp
+```
+
+**설정:**
+
+```json
+{
+  "mcpServers": {
+    "slidespeak": {
+      "command": "npx",
+      "args": ["-y", "@slidespeak/mcp"],
+      "env": {
+        "SLIDESPEAK_API_KEY": "your_api_key"
+      }
+    }
+  }
+}
+```
+
+**사용법:**
+
+```
+User: "AI 트렌드 2026" 주제로 10장짜리 프레젠테이션 만들어줘
+User: 이 보고서 내용을 PPT로 변환해줘
+User: 투자자 피칭 덱 만들어줘
+```
+
+**참고:** [SlideSpeak MCP Blog](https://slidespeak.co/blog/2025/07/21/create-ai-presentations-in-claude-using-mcp)
+
+---
+
+### 12. Plus AI MCP - 고급 프레젠테이션
+
+[Plus AI MCP](https://plusai.com/features/mcp)는 커스텀 템플릿과 고급 슬라이드 요소(차트, 이미지)를 지원하는 프레젠테이션 생성 MCP입니다.
+
+**기능:**
+- 네이티브 PowerPoint/Google Slides 생성
+- 커스텀 템플릿 지원
+- 차트, 그래프, 이미지 자동 생성
+- 기존 워크플로우에 쉽게 통합
+
+**특징:**
+다른 AI 프레젠테이션 도구와 달리 **네이티브 슬라이드**를 생성하여 바로 편집 가능
+
+**설정:**
+
+```json
+{
+  "mcpServers": {
+    "plusai": {
+      "command": "npx",
+      "args": ["-y", "@plusai/mcp-server"],
+      "env": {
+        "PLUSAI_API_KEY": "your_api_key"
+      }
+    }
+  }
+}
+```
+
+**참고:** [Plus AI MCP](https://plusai.com/features/mcp)
+
+---
+
+### 13. FlashDocs MCP - 범용 문서/슬라이드 생성
+
+[FlashDocs MCP](https://www.flashdocs.com/post/flashdocs-model-context-protocol-mcp)는 AI가 구조화된 방식으로 슬라이드 덱을 생성할 수 있게 해주는 MCP 서버입니다.
+
+**기능:**
+- PowerPoint, Google Slides, PDF 출력
+- 메타데이터, 슬라이드 의도, 콘텐츠 블록, 레이아웃 힌트 지정
+- AI 에이전트/앱에서 바로 사용 가능
+
+**설정:**
+
+```json
+{
+  "mcpServers": {
+    "flashdocs": {
+      "command": "npx",
+      "args": ["-y", "@flashdocs/mcp"],
+      "env": {
+        "FLASHDOCS_API_KEY": "your_api_key"
+      }
+    }
+  }
+}
+```
+
+**사용법:**
+
+```
+User: 이 내용으로 발표 자료 만들어줘 (PowerPoint로)
+User: 팀 회의용 슬라이드 PDF로 생성해줘
+```
+
+**참고:** [FlashDocs MCP](https://www.flashdocs.com/post/flashdocs-model-context-protocol-mcp)
+
+---
+
 ## 📦 포함된 커스텀 MCP 서버
 
 ### claude-orchestrator-mcp
@@ -438,6 +693,12 @@ claude mcp add playwright -- npx -y @playwright/mcp@latest
 
 # Stitch - UI 디자인 (자동 설정)
 npx -p stitch-mcp-auto stitch-mcp-auto-setup
+
+# Canva - 디자인 & 프레젠테이션
+claude mcp add canva -- npx -y @canva/mcp-server
+
+# SlideSpeak - AI PPT 생성
+claude mcp add slidespeak -- npx -y @slidespeak/mcp
 
 # GitHub
 claude mcp add github -- npx -y @modelcontextprotocol/server-github
@@ -573,5 +834,5 @@ node --version
 
 ---
 
-**버전:** 2.0.0
-**최종 업데이트:** 2026-01-24
+**버전:** 2.1.0
+**최종 업데이트:** 2026-01-26
