@@ -106,25 +106,29 @@ chmod +x install.sh && ./install.sh
 
 ## External Resources (Recommended)
 
+> **[Detailed Documentation](docs/resources/)** - 각 리소스에 대한 상세 문서 (기능, 설치, 사용법, 장단점)
+
 ### Skills & Plugins
 
-| Resource | Description | Install |
-|----------|-------------|---------|
-| [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills) | React/Next.js best practices (45+ rules) | `npx add-skill vercel-labs/agent-skills -a claude-code` |
-| [oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode) | 32 agents, 40+ skills, multi-agent orchestration | `/plugin install oh-my-claudecode` |
-| [claude-code-dotnet](https://github.com/Aaronontheweb/claude-code-dotnet) | C#/WPF/MAUI/.NET skills | `npx add-skill Aaronontheweb/claude-code-dotnet -a claude-code` |
-| [mastering-typescript-skill](https://github.com/SpillwaveSolutions/mastering-typescript-skill) | Enterprise TypeScript (NestJS, React 19) | `npx add-skill SpillwaveSolutions/mastering-typescript-skill -a claude-code` |
-| [pg-aiguide](https://github.com/timescale/pg-aiguide) | PostgreSQL best practices | `claude plugin install pg-aiguide` |
+| Resource | Description | Install | Docs |
+|----------|-------------|---------|------|
+| [everything-claude-code](https://github.com/affaan-m/everything-claude-code) | Anthropic hackathon winner setup (12 agents, 16 skills) | `/plugin marketplace add affaan-m/everything-claude-code` | [상세](docs/resources/everything-claude-code.md) |
+| [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills) | React/Next.js best practices (45+ rules) | `npx add-skill vercel-labs/agent-skills -a claude-code` | [상세](docs/resources/vercel-agent-skills.md) |
+| [oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode) | 32 agents, 40+ skills, multi-agent orchestration | `/plugin install oh-my-claudecode` | [상세](docs/resources/oh-my-claudecode.md) |
+| [claude-code-dotnet](https://github.com/Aaronontheweb/claude-code-dotnet) | C#/WPF/MAUI/.NET skills | `npx add-skill Aaronontheweb/claude-code-dotnet -a claude-code` | - |
+| [mastering-typescript-skill](https://github.com/SpillwaveSolutions/mastering-typescript-skill) | Enterprise TypeScript (NestJS, React 19) | `npx add-skill SpillwaveSolutions/mastering-typescript-skill -a claude-code` | - |
+| [pg-aiguide](https://github.com/timescale/pg-aiguide) | PostgreSQL best practices | `claude plugin install pg-aiguide` | - |
+| [skills.sh](https://skills.sh/) | 25K+ skills directory by Vercel | `npx skills add <owner/repo>` | [상세](docs/resources/skills-sh.md) |
 
 ### MCP Servers
 
-| MCP | Description | Install |
-|-----|-------------|---------|
-| **[Toss Payments](https://toss.tech/article/tosspayments-mcp)** | Payment integration in 10 min (PG industry first) | `claude mcp add tosspayments -- npx -y @tosspayments/integration-guide-mcp@latest` |
-| [Context7](https://github.com/upstash/context7) | Library documentation search | `claude mcp add context7 -- npx -y @upstash/context7-mcp` |
-| [Playwright](https://github.com/microsoft/playwright-mcp) | Browser automation | `claude mcp add playwright -- npx -y @playwright/mcp@latest` |
-| [Stitch](https://github.com/anthropics/stitch-mcp) | Google Stitch UI design | `npx -p stitch-mcp-auto stitch-mcp-auto-setup` |
-| [GitHub](https://github.com/github/github-mcp-server) | GitHub API access | `claude mcp add github -- npx -y @modelcontextprotocol/server-github` |
+| MCP | Description | Install | Docs |
+|-----|-------------|---------|------|
+| **[Toss Payments](https://toss.tech/article/tosspayments-mcp)** | Payment integration in 10 min (PG industry first) | `claude mcp add tosspayments -- npx -y @tosspayments/integration-guide-mcp@latest` | [상세](docs/resources/toss-payments-mcp.md) |
+| [Context7](https://github.com/upstash/context7) | Library documentation search | `claude mcp add context7 -- npx -y @upstash/context7-mcp` | [상세](docs/resources/context7-mcp.md) |
+| [Playwright](https://github.com/microsoft/playwright-mcp) | Browser automation | `claude mcp add playwright -- npx -y @playwright/mcp@latest` | - |
+| [Stitch](https://github.com/anthropics/stitch-mcp) | Google Stitch UI design | `npx -p stitch-mcp-auto stitch-mcp-auto-setup` | - |
+| [GitHub](https://github.com/github/github-mcp-server) | GitHub API access | `claude mcp add github -- npx -y @modelcontextprotocol/server-github` | - |
 
 **Free & Local (No API Key):**
 
@@ -183,6 +187,16 @@ claude-code-customizations/
 ├── mcp-servers/               # MCP server guides
 │   ├── README.md
 │   └── claude-orchestrator-mcp/
+├── docs/                      # Documentation
+│   └── resources/             # External resource docs
+│       ├── README.md          # Resource index
+│       ├── _template.md       # Template for new docs
+│       ├── everything-claude-code.md
+│       ├── vercel-agent-skills.md
+│       ├── oh-my-claudecode.md
+│       ├── skills-sh.md
+│       ├── toss-payments-mcp.md
+│       └── context7-mcp.md
 ├── install.bat                # Windows installer
 ├── install.sh                 # Linux/Mac installer
 ├── SETUP.md                   # Complete setup guide
