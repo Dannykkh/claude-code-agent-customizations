@@ -52,39 +52,6 @@ Skills 중 "워크플로우/액션"은 유지:
 - docker-deploy, code-reviewer (실행 로직), naming-analyzer (분석)
 - 사용자 트리거 필요
 
-### 장기기억 시스템 구조 (2026-02-01)
-
-세션 간 컨텍스트 유지를 위한 3단계 메모리 시스템:
-
-**구성요소:**
-| 구성요소 | 파일 | 역할 |
-|---------|------|------|
-| 저장소 | `MEMORY.md` | 구조화된 장기기억 (이 파일) |
-| 규칙 | `CLAUDE.md` | Claude에게 메모리 기록 지시 |
-| 대화 로그 | `hooks/save-conversation.sh` | 원시 대화 백업 (.claude/conversations/) |
-| 자동 정리 | `hooks/update-memory.sh` | Stop 훅 → memory-writer 호출 |
-| 정리 에이전트 | `agents/memory-writer.md` | 대화 분석 → MEMORY.md 작성 |
-| 핸드오프 | `skills/session-handoff/` | 구조화된 세션 인수인계 문서 |
-
-**작동 흐름:**
-```
-세션 중
-├── [자동] UserPromptSubmit → save-conversation.sh → .claude/conversations/날짜.md
-└── [수동] Claude가 중요한 결정 시 → MEMORY.md 직접 추가
-
-세션 종료
-└── [자동] Stop 훅 → update-memory.sh → memory-writer → MEMORY.md 정리
-
-수동 백업 (Stop 훅 놓쳤을 때)
-├── "메모리에 정리해줘" → memory-writer 에이전트 호출
-└── /session-handoff → 구조화된 핸드오프 문서 생성
-```
-
-**핵심 원칙:**
-- 대화 로그는 항상 저장 (데이터 손실 방지)
-- 정리는 에이전트가 담당 (LLM 필요)
-- Stop 훅 놓쳐도 수동 복구 가능
-
 ## 작업 패턴
 
 ### 새 스킬 추가 워크플로우
