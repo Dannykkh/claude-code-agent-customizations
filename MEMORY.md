@@ -65,6 +65,49 @@ Skills 중 "워크플로우/액션"은 유지:
 - README.md (영문) 수정 시 README-ko.md (한국어)도 함께 업데이트
 - AGENTS.md 수정 시 Quick Retrieval Paths 테이블 확인
 
+## MCP 서버
+
+### claude-orchestrator-mcp (2026-02-02)
+
+PM + Worker 패턴의 병렬 처리 오케스트레이터:
+- **위치**: `mcp-servers/claude-orchestrator-mcp/`
+- **설정**: `.claude/settings.local.json`에 등록됨
+- **실행**: `.\scripts\launch.ps1 -ProjectPath "경로"`
+- **용도**: 대규모 리팩토링, 모듈별 병렬 작업
+
+핵심 도구:
+- PM: `orchestrator_analyze_codebase`, `orchestrator_create_task`
+- Worker: `orchestrator_claim_task`, `orchestrator_lock_file`, `orchestrator_complete_task`
+
+### 멀티 AI 오케스트레이션 도구 (2026-02-02)
+
+외부 도구 비교 분석 결과:
+| 도구 | 특징 | 추천 용도 |
+|------|------|----------|
+| Claude-Octopus | 3 AI 동시 + 자동 합성 | 아키텍처 리뷰 |
+| Claude-Code-Workflow | 가장 풍부, 대시보드 | 복잡한 워크플로우 |
+| myclaude | 심플 설치 | 빠른 시작 |
+
+스킬 `multi-ai-orchestration` 추가됨 - 설정 및 사용 가이드 포함
+
+## 장기기억 시스템 (2026-02-02)
+
+### 구성 요소
+- **에이전트**: `agents/memory-writer.md` - 세션 종료 시 대화 분석 및 MEMORY.md 자동 업데이트
+- **스킬**: `skills/long-term-memory/` - 수동 기억 추가/조회 기능
+
+### 사용 방법
+- 기억 추가: `"이거 기억해: ..."` 또는 `/memory add ...`
+- 기억 조회: `"...에 대해 뭘 기억해?"` 또는 `/memory search ...`
+- 전체 보기: `"장기기억 보여줘"` 또는 `/memory list`
+
+### 자동 기록 대상
+- 아키텍처/설계 결정
+- 버그 원인과 해결 방법
+- 기술 스택 선택 이유
+- 반복되는 작업 패턴
+- 주의해야 할 함정/이슈
+
 ## 주의사항
 
 ### 중복 방지
