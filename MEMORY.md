@@ -74,10 +74,20 @@ PM + Worker 패턴의 병렬 처리 오케스트레이터:
 - **설정**: `.claude/settings.local.json`에 등록됨
 - **실행**: `.\scripts\launch.ps1 -ProjectPath "경로"`
 - **용도**: 대규모 리팩토링, 모듈별 병렬 작업
+- **트리거**: `workpm` (PM 모드), `pmworker` (Worker 모드)
 
 핵심 도구:
 - PM: `orchestrator_analyze_codebase`, `orchestrator_create_task`
 - Worker: `orchestrator_claim_task`, `orchestrator_lock_file`, `orchestrator_complete_task`
+
+### 오케스트레이터 설계 결정 (2026-02-02)
+
+**에이전트 간 대화 기능 미도입 결정:**
+- 파일 락으로 충돌 이미 방지됨
+- PM이 태스크를 명확히 정의하면 대화 불필요
+- 속도가 핵심 장점인데 대화 대기로 느려지면 의미 감소
+- 대신: PM 태스크 정의 프롬프트 강화로 대응
+- 나중에 필요하면 messages 필드로 추가 가능
 
 ### 멀티 AI 오케스트레이션 도구 (2026-02-02)
 
