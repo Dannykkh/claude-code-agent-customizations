@@ -31,6 +31,7 @@
 | superseded, history, decision-change | [#patterns/superseded-pattern](#supersededpattern) |
 | skill-500, progressive-disclosure | [#patterns/skill-optimization](#skilloptimization) |
 | naming, kebab-case | [#patterns/naming-convention](#namingconvention) |
+| fullstack, spring-boot, flow, orchestration | [#architecture/fullstack-coding-standards](#fullstackcodingstandards) |
 
 ---
 
@@ -72,6 +73,23 @@
 - User 입력: 훅에서 자동 저장
 - Assistant 응답: Claude가 직접 저장 (Edit 도구, ~100ms)
 - MEMORY.md: 컨텍스트 트리 구조 (architecture/, patterns/, gotchas/)
+
+**참조**: [2026-02-03 대화](.claude/conversations/2026-02-03.md)
+
+### fullstack-coding-standards
+`tags: agent, skill, fullstack, spring-boot, react, orchestration, flow`
+`date: 2026-02-03`
+
+**설계 결정 - 에이전트+스킬 분리:**
+- Before: 단일 에이전트 484줄 (규칙+코드 예시 혼재)
+- After: 에이전트(~235줄 규칙/체크리스트) + 스킬(코드 예시 + templates/)
+- **이유**: 500줄 제한 준수, 패시브 에이전트는 규칙만, 상세 코드는 on-demand
+
+**핵심 아키텍처:**
+- 백엔드 4계층: Controller → Flow → Service → Repository
+- Flow 항상 존재 (단순 위임도 통일성 우선)
+- 프론트 Feature-based + TanStack Query 3계층
+- Java/Spring Boot 12개 코딩 규칙 포함 (@Transactional, DTO 변환, 예외 처리 등)
 
 **참조**: [2026-02-03 대화](.claude/conversations/2026-02-03.md)
 
