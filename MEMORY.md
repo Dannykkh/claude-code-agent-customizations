@@ -28,6 +28,7 @@
 | 3-layer, hooks, validation | [#architecture/three-layer](#threelayer) |
 | orchestrator, pm-worker, parallel | [#tools/orchestrator](#orchestrator) |
 | memory, conversation, hooks | [#architecture/long-term-memory](#longtermmemory) |
+| superseded, history, decision-change | [#patterns/superseded-pattern](#supersededpattern) |
 | skill-500, progressive-disclosure | [#patterns/skill-optimization](#skilloptimization) |
 | naming, kebab-case | [#patterns/naming-convention](#namingconvention) |
 
@@ -53,14 +54,20 @@
 3. **Skills (On-demand)**: 상세 분석 필요 시 → 심화
 
 ### long-term-memory
-`tags: memory, conversation, hooks, append`
+`tags: memory, conversation, hooks, append, context-tree`
 `date: 2026-02-03`
 
-- **저장**: 대화 로그 단순 append (AI 호출 없음, 빠름)
-- **키워드**: 해시태그(#keyword) 자동 추출
-- **업데이트**: Claude가 대화 중 판단하여 MEMORY.md 직접 수정
-- **구조**: 컨텍스트 트리 + 키워드 인덱스
-- **참조**: [2026-02-03 대화](.claude/conversations/2026-02-03.md)
+**설계 결정 - Stop 훅 제거:**
+- Before: Stop 훅에서 Claude 2번 호출 (키워드 추출 + 메모리 업데이트)
+- After: Stop 훅 없음, Claude가 대화 중 직접 처리
+- **이유**: 속도 개선 (훅에서 AI 호출 금지 원칙)
+
+**구현:**
+- `save-conversation.ps1`: 103줄 → 30줄 (단순 append만)
+- MEMORY.md: 컨텍스트 트리 구조 (architecture/, patterns/, gotchas/)
+- 키워드 인덱스 테이블로 빠른 검색
+
+**참조**: [2026-02-03 대화](.claude/conversations/2026-02-03.md)
 
 ---
 
@@ -97,6 +104,23 @@
 
 - README.md ↔ README-ko.md 동기화
 - AGENTS.md 수정 시 Quick Retrieval Paths 확인
+
+### superseded-pattern
+`tags: superseded, history, decision-change`
+`date: 2026-02-03`
+
+결정이 바뀌면 **삭제 금지**, 이력 보존:
+
+```markdown
+### 기존-결정 ❌ SUPERSEDED
+`superseded-by: #새-결정`
+
+### 새-결정 ✅ CURRENT
+`supersedes: #기존-결정`
+- **변경 이유**: ...
+```
+
+**참조**: [2026-02-03 대화](.claude/conversations/2026-02-03.md)
 
 ---
 
