@@ -27,7 +27,7 @@
 | agents, skills, passive-context | [#architecture/agents-vs-skills](#agentsvsskills) |
 | 3-layer, hooks, validation | [#architecture/three-layer](#threelayer) |
 | orchestrator, pm-worker, parallel | [#tools/orchestrator](#orchestrator) |
-| memory, conversation, hooks | [#architecture/long-term-memory](#longtermmemory) |
+| memory, conversation, hooks, response-saving | [#architecture/long-term-memory](#longtermmemory) |
 | superseded, history, decision-change | [#patterns/superseded-pattern](#supersededpattern) |
 | skill-500, progressive-disclosure | [#patterns/skill-optimization](#skilloptimization) |
 | naming, kebab-case | [#patterns/naming-convention](#namingconvention) |
@@ -54,7 +54,7 @@
 3. **Skills (On-demand)**: 상세 분석 필요 시 → 심화
 
 ### long-term-memory
-`tags: memory, conversation, hooks, append, context-tree`
+`tags: memory, conversation, hooks, append, context-tree, response-saving`
 `date: 2026-02-03`
 
 **설계 결정 - Stop 훅 제거:**
@@ -62,10 +62,16 @@
 - After: Stop 훅 없음, Claude가 대화 중 직접 처리
 - **이유**: 속도 개선 (훅에서 AI 호출 금지 원칙)
 
+**설계 결정 - 응답 저장 확대:**
+- Before: 코드 작성, 파일 수정 등 "실제 작업"만 저장
+- After: 의미있는 대화 모두 저장 (토론, 의사결정 과정 포함)
+- **이유**: "의견을 도출해나가는 과정"도 가치 있음
+- **제외**: 단순 인사, 잡담만
+
 **구현:**
-- `save-conversation.ps1`: 103줄 → 30줄 (단순 append만)
+- User 입력: 훅에서 자동 저장
+- Assistant 응답: Claude가 직접 저장 (Edit 도구, ~100ms)
 - MEMORY.md: 컨텍스트 트리 구조 (architecture/, patterns/, gotchas/)
-- 키워드 인덱스 테이블로 빠른 검색
 
 **참조**: [2026-02-03 대화](.claude/conversations/2026-02-03.md)
 
