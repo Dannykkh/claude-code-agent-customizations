@@ -1,133 +1,141 @@
-﻿# MEMORY.md - 프로젝트 장기기억
+# MEMORY.md - 프로젝트 장기기억
 
-이 파일은 Claude Code가 세션 간에 기억해야 할 정보를 저장합니다.
-새 세션마다 자동으로 로드됩니다.
+컨텍스트 트리 구조의 장기기억 저장소입니다.
+키워드로 검색하거나, 트리 구조로 탐색할 수 있습니다.
 
 ---
 
-## 프로젝트 컨텍스트
+## 키워드 인덱스
 
-- 프로젝트: claude-code-agent-customizations
-- 생성일: 2026-01-29
+| 키워드 | 섹션 |
+|--------|------|
+| agents, skills, passive-context | [#architecture/agents-vs-skills](#agentsvsskills) |
+| 3-layer, hooks, validation | [#architecture/three-layer](#threelayer) |
+| orchestrator, pm-worker, parallel | [#tools/orchestrator](#orchestrator) |
+| memory, conversation, hooks | [#architecture/long-term-memory](#longtermmemory) |
+| skill-500, progressive-disclosure | [#patterns/skill-optimization](#skilloptimization) |
+| naming, kebab-case | [#patterns/naming-convention](#namingconvention) |
 
-## 중요한 결정사항
+---
 
-### AGENTS.md vs Skills 전략 (2026-01-31)
+## architecture/
 
-Vercel 연구 결과에 따른 설계 결정:
-- **AGENTS.md**: 프레임워크 지식, 코드 생성 규칙 (패시브 컨텍스트 = 100% 통과율)
-- **Skills**: 사용자 트리거 워크플로우, 버전 마이그레이션, 아키텍처 변경
+### agents-vs-skills
+`tags: agents, skills, passive-context, vercel`
+`date: 2026-01-31`
 
-핵심 원칙: "Retrieval-led reasoning > Pre-training knowledge"
-- 로컬 문서가 존재하면 학습 데이터보다 우선 참조
-- 압축된 인덱스 형식으로 컨텍스트 효율성 극대화 (40KB → 8KB로 80% 압축해도 100% 유지)
+- **AGENTS.md**: 프레임워크 지식, 코드 생성 규칙 (패시브 = 100% 통과율)
+- **Skills**: 사용자 트리거 워크플로우, 마이그레이션
+- **원칙**: Retrieval-led reasoning > Pre-training knowledge
+- **참조**: [2026-01-31 대화](.claude/conversations/2026-01-31.md)
 
-## 학습된 교훈
+### three-layer
+`tags: 3-layer, hooks, validation, architecture`
+`date: 2026-01-31`
 
-### SKILL.md 컨텍스트 최적화 (2026-01-31)
-
-- **500줄 제한**: SKILL.md는 500줄 이하 유지
-- **Progressive Disclosure**: 상세 내용은 `templates/` 또는 `references/` 폴더로 분리
-- **예시**: docker-deploy 스킬 리팩토링 (1,179줄 → 109줄 + templates/)
-
-### 네이밍 컨벤션 (2026-01-31)
-
-- 폴더명 = YAML frontmatter의 `name` 필드와 일치해야 함
-- kebab-case 사용 (예: `python-backend-fastapi`, `vercel-react-best-practices`)
-
-### 3중 레이어 아키텍처 (2026-01-31)
-
-Vercel 연구 기반 3중 레이어 구조 도입:
-1. **AGENTS.md (Passive)**: 핵심 규칙이 항상 컨텍스트에 존재 → 예방
+1. **AGENTS.md (Passive)**: 핵심 규칙 항상 존재 → 예방
 2. **Hooks (Automatic)**: 규칙 위반 자동 감지 → 검증
 3. **Skills (On-demand)**: 상세 분석 필요 시 → 심화
 
-### 가이드라인 vs 워크플로우 분리 (2026-01-31)
+### long-term-memory
+`tags: memory, conversation, hooks, append`
+`date: 2026-02-03`
 
-Skills 중 "순수 가이드라인"은 Agents로 이동:
-- react-best-practices, python-fastapi-guidelines, writing-guidelines 등
-- 항상 적용되어야 할 규칙 → auto_apply: true
-
-Skills 중 "워크플로우/액션"은 유지:
-- docker-deploy, code-reviewer (실행 로직), naming-analyzer (분석)
-- 사용자 트리거 필요
-
-## 작업 패턴
-
-### 새 스킬 추가 워크플로우
-1. `skills/{skill-name}/SKILL.md` 생성
-2. YAML frontmatter에 `name`, `description` 필수
-3. 500줄 초과 시 `templates/` 또는 `references/` 분리
-4. `zip -r {skill-name}.zip {skill-name}/` 패키징
-5. AGENTS.md, README.md 업데이트
-
-### 문서 동기화
-- README.md (영문) 수정 시 README-ko.md (한국어)도 함께 업데이트
-- AGENTS.md 수정 시 Quick Retrieval Paths 테이블 확인
-
-## MCP 서버
-
-### claude-orchestrator-mcp (2026-02-02)
-
-PM + Worker 패턴의 병렬 처리 오케스트레이터:
-- **위치**: `mcp-servers/claude-orchestrator-mcp/`
-- **설정**: `.claude/settings.local.json`에 등록됨
-- **실행**: `.\scripts\launch.ps1 -ProjectPath "경로"`
-- **용도**: 대규모 리팩토링, 모듈별 병렬 작업
-- **트리거**: `workpm` (PM 모드), `pmworker` (Worker 모드)
-
-핵심 도구:
-- PM: `orchestrator_analyze_codebase`, `orchestrator_create_task`
-- Worker: `orchestrator_claim_task`, `orchestrator_lock_file`, `orchestrator_complete_task`
-
-### 오케스트레이터 설계 결정 (2026-02-02)
-
-**에이전트 간 대화 기능 미도입 결정:**
-- 파일 락으로 충돌 이미 방지됨
-- PM이 태스크를 명확히 정의하면 대화 불필요
-- 속도가 핵심 장점인데 대화 대기로 느려지면 의미 감소
-- 대신: PM 태스크 정의 프롬프트 강화로 대응
-- 나중에 필요하면 messages 필드로 추가 가능
-
-### 멀티 AI 오케스트레이션 도구 (2026-02-02)
-
-외부 도구 비교 분석 결과:
-| 도구 | 특징 | 추천 용도 |
-|------|------|----------|
-| Claude-Octopus | 3 AI 동시 + 자동 합성 | 아키텍처 리뷰 |
-| Claude-Code-Workflow | 가장 풍부, 대시보드 | 복잡한 워크플로우 |
-| myclaude | 심플 설치 | 빠른 시작 |
-
-스킬 `multi-ai-orchestration` 추가됨 - 설정 및 사용 가이드 포함
-
-## 장기기억 시스템 (2026-02-02)
-
-### 구성 요소
-- **에이전트**: `agents/memory-writer.md` - 세션 종료 시 대화 분석 및 MEMORY.md 자동 업데이트
-- **스킬**: `skills/long-term-memory/` - 수동 기억 추가/조회 기능
-
-### 사용 방법
-- 기억 추가: `"이거 기억해: ..."` 또는 `/memory add ...`
-- 기억 조회: `"...에 대해 뭘 기억해?"` 또는 `/memory search ...`
-- 전체 보기: `"장기기억 보여줘"` 또는 `/memory list`
-
-### 자동 기록 대상
-- 아키텍처/설계 결정
-- 버그 원인과 해결 방법
-- 기술 스택 선택 이유
-- 반복되는 작업 패턴
-- 주의해야 할 함정/이슈
-
-## 주의사항
-
-### 중복 방지
-- 새 스킬/에이전트 추가 전 기존 항목과 중복 확인
-- 예시: erd-designer는 mermaid-diagrams에 포함됨 → 삭제됨
-
-### 컨텍스트 효율성
-- Skills는 on-demand 로딩 (트리거 시에만 SKILL.md 로드)
-- AGENTS.md는 항상 로드됨 → 핵심 정보만 압축하여 포함
-- 큰 파일(500줄+)은 참조 파일로 분리하여 progressive disclosure 적용
+- **저장**: 대화 로그 단순 append (AI 호출 없음, 빠름)
+- **키워드**: 해시태그(#keyword) 자동 추출
+- **업데이트**: Claude가 대화 중 판단하여 MEMORY.md 직접 수정
+- **구조**: 컨텍스트 트리 + 키워드 인덱스
+- **참조**: [2026-02-03 대화](.claude/conversations/2026-02-03.md)
 
 ---
-*이 파일은 TermSnap에서 자동 생성되었습니다. 자유롭게 수정하세요.*
+
+## patterns/
+
+### skill-optimization
+`tags: skill-500, progressive-disclosure, context`
+`date: 2026-01-31`
+
+- **500줄 제한**: SKILL.md는 500줄 이하 유지
+- **분리**: 상세 내용은 `templates/` 또는 `references/`로
+- **예시**: docker-deploy (1,179줄 → 109줄 + templates/)
+
+### naming-convention
+`tags: naming, kebab-case, folder`
+`date: 2026-01-31`
+
+- 폴더명 = YAML frontmatter `name` 필드와 일치
+- kebab-case 사용 (예: `python-backend-fastapi`)
+
+### add-skill-workflow
+`tags: skill, workflow, packaging`
+`date: 2026-01-31`
+
+1. `skills/{skill-name}/SKILL.md` 생성
+2. YAML frontmatter에 `name`, `description` 필수
+3. 500줄 초과 시 분리
+4. `zip -r {skill-name}.zip {skill-name}/`
+5. AGENTS.md, README.md 업데이트
+
+### doc-sync
+`tags: readme, documentation, sync`
+`date: 2026-01-31`
+
+- README.md ↔ README-ko.md 동기화
+- AGENTS.md 수정 시 Quick Retrieval Paths 확인
+
+---
+
+## tools/
+
+### orchestrator
+`tags: orchestrator, pm-worker, parallel, mcp`
+`date: 2026-02-02`
+
+PM + Worker 패턴의 병렬 처리:
+- **위치**: `mcp-servers/claude-orchestrator-mcp/`
+- **트리거**: `workpm` (PM), `pmworker` (Worker)
+- **PM 도구**: `orchestrator_analyze_codebase`, `orchestrator_create_task`
+- **Worker 도구**: `orchestrator_claim_task`, `orchestrator_lock_file`
+- **참조**: [2026-02-02 대화](.claude/conversations/2026-02-02.md)
+
+**설계 결정 - 에이전트 간 대화 미도입:**
+- 파일 락으로 충돌 방지됨
+- PM이 명확히 정의하면 대화 불필요
+- 속도 > 협업 (대화 대기로 느려지면 의미 감소)
+
+### multi-ai-tools
+`tags: multi-ai, octopus, workflow, comparison`
+`date: 2026-02-02`
+
+| 도구 | 특징 | 용도 |
+|------|------|------|
+| Claude-Octopus | 3 AI + 자동 합성 | 아키텍처 리뷰 |
+| Claude-Code-Workflow | 대시보드 | 복잡한 워크플로우 |
+| myclaude | 심플 | 빠른 시작 |
+
+---
+
+## gotchas/
+
+### duplication-check
+`tags: duplication, skill, agent`
+`date: 2026-01-31`
+
+- 새 스킬/에이전트 추가 전 기존 항목과 중복 확인
+- 예: erd-designer는 mermaid-diagrams에 포함 → 삭제됨
+
+### context-efficiency
+`tags: context, token, loading`
+`date: 2026-01-31`
+
+- Skills: on-demand 로딩 (트리거 시에만)
+- AGENTS.md: 항상 로드 → 핵심만 압축
+- 500줄+ 파일: 참조로 분리 (progressive disclosure)
+
+---
+
+## meta/
+
+- **프로젝트**: claude-code-agent-customizations
+- **생성일**: 2026-01-29
+- **구조 개편**: 2026-02-03 (컨텍스트 트리 도입)
