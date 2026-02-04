@@ -32,6 +32,9 @@
 | skill-500, progressive-disclosure | [#patterns/skill-optimization](#skilloptimization) |
 | naming, kebab-case | [#patterns/naming-convention](#namingconvention) |
 | fullstack, spring-boot, flow, orchestration | [#architecture/fullstack-coding-standards](#fullstackcodingstandards) |
+| stop-hook, transcript, save-response, jsonl | [#architecture/stop-hook-response-saving](#stophookresponsesaving) |
+| wrap-up, session, keyword, 장기기억 | [#patterns/wrap-up-pattern](#wrapuppattern) |
+| install-orchestrator, project-install | [#tools/orchestrator-installer](#orchestratorinstaller) |
 
 ---
 
@@ -58,7 +61,8 @@
 `tags: memory, conversation, hooks, append, context-tree, response-saving`
 `date: 2026-02-03`
 
-**설계 결정 - Stop 훅 제거:**
+**설계 결정 - Stop 훅 제거:** ❌ SUPERSEDED
+`superseded-by: #stop-hook-response-saving`
 - Before: Stop 훅에서 Claude 2번 호출 (키워드 추출 + 메모리 업데이트)
 - After: Stop 훅 없음, Claude가 대화 중 직접 처리
 - **이유**: 속도 개선 (훅에서 AI 호출 금지 원칙)
@@ -71,10 +75,22 @@
 
 **구현:**
 - User 입력: 훅에서 자동 저장
-- Assistant 응답: Claude가 직접 저장 (Edit 도구, ~100ms)
+- Assistant 응답: Claude가 직접 저장 (Edit 도구, ~100ms) → 실패, Stop 훅으로 대체
 - MEMORY.md: 컨텍스트 트리 구조 (architecture/, patterns/, gotchas/)
 
 **참조**: [2026-02-03 대화](.claude/conversations/2026-02-03.md)
+
+### stop-hook-response-saving ✅ CURRENT
+`tags: stop-hook, transcript, save-response, jsonl`
+`date: 2026-02-04`
+`supersedes: #long-term-memory의 "Stop 훅 제거" 결정`
+
+- **변경 이유**: "Claude가 직접 저장"은 실행되지 않음 (수동 지시 무시됨)
+- Stop 훅에서 **AI 호출 없이** transcript JSONL에서 기계적으로 추출
+- Claude Code JSONL은 thinking/text/tool_use를 별도 줄로 분리 → `"type":"assistant"` AND `"type":"text"` 모두 매칭 필요
+- 500자 제한, 중복 방지 (같은 분에 1회만)
+- **파일**: `hooks/save-response.ps1`, `hooks/save-response.sh`
+- **참조**: [2026-02-04 대화](.claude/conversations/2026-02-04.md)
 
 ### fullstack-coding-standards
 `tags: agent, skill, fullstack, spring-boot, react, orchestration, flow`
@@ -129,6 +145,17 @@
 - README.md ↔ README-ko.md 동기화
 - AGENTS.md 수정 시 Quick Retrieval Paths 확인
 
+### wrap-up-pattern
+`tags: wrap-up, session, keyword, memory, 장기기억`
+`date: 2026-02-04`
+
+- `/wrap-up` 슬래시 명령어로 세션 종료 시 실행
+- 키워드 추출 → frontmatter 업데이트
+- 세션 요약 (오늘 한 일, 주요 결정, 다음 할 일)
+- 중요 결정 → MEMORY.md 업데이트 (Superseded 패턴 적용)
+- **핵심**: RAG 없이 키워드 기반 파일 검색으로 가벼운 장기기억
+- **참조**: [2026-02-04 대화](.claude/conversations/2026-02-04.md)
+
 ### superseded-pattern
 `tags: superseded, history, decision-change`
 `date: 2026-02-03`
@@ -165,6 +192,17 @@ PM + Worker 패턴의 병렬 처리:
 - 파일 락으로 충돌 방지됨
 - PM이 명확히 정의하면 대화 불필요
 - 속도 > 협업 (대화 대기로 느려지면 의미 감소)
+
+### orchestrator-installer
+`tags: install-orchestrator, project-install, mcp, hooks`
+`date: 2026-02-04`
+
+- `install-orchestrator.js`: 프로젝트별 Orchestrator 설치/제거
+- 4단계: MCP 빌드 → 훅 복사 → 명령어 복사 → settings.local.json 머지
+- 플랫폼 감지 (Win: ps1, Linux/Mac: sh)
+- 기존 설정 보존, 중복 방지
+- `--uninstall`로 깨끗하게 제거
+- **참조**: [2026-02-04 대화](.claude/conversations/2026-02-04.md)
 
 ### multi-ai-tools
 `tags: multi-ai, octopus, workflow, comparison`
