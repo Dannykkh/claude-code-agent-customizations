@@ -35,6 +35,9 @@
 | stop-hook, transcript, save-response, jsonl | [#architecture/stop-hook-response-saving](#stophookresponsesaving) |
 | wrap-up, session, keyword, 장기기억 | [#patterns/wrap-up-pattern](#wrapuppattern) |
 | install-orchestrator, project-install | [#tools/orchestrator-installer](#orchestratorinstaller) |
+| gepetto, verify, spec, 검증 | [#tools/gepetto-verify](#gepettoverify) |
+| explain, learning-harness, 비유, mermaid | [#tools/explain-skill](#explainskill) |
+| synonym, 동의어, search, 확장 | [#architecture/synonym-expansion-search](#synonymexpansionsearch) |
 
 ---
 
@@ -79,6 +82,17 @@
 - MEMORY.md: 컨텍스트 트리 구조 (architecture/, patterns/, gotchas/)
 
 **참조**: [2026-02-03 대화](.claude/conversations/2026-02-03.md)
+
+### synonym-expansion-search ✅ CURRENT
+`tags: synonym, 동의어, search, 확장, memory, grep`
+`date: 2026-02-04`
+
+- 과거 대화 검색 시 정확한 키워드 매칭 → **동의어/관련어 확장** 검색으로 개선
+- 한↔영 양방향 확장 (예: "병렬 작업" → parallel, orchestrator, pm-worker)
+- 최대 3회 재시도, 하위 키워드 발견 시 추가 탐색 1회
+- 벡터 DB 없이 Claude의 언어 이해력으로 동의어 확장
+- CLAUDE.md 검색 규칙 3단계 → 5단계로 확장
+- **참조**: [2026-02-04 대화](.claude/conversations/2026-02-04.md)
 
 ### stop-hook-response-saving ✅ CURRENT
 `tags: stop-hook, transcript, save-response, jsonl`
@@ -202,6 +216,28 @@ PM + Worker 패턴의 병렬 처리:
 - 플랫폼 감지 (Win: ps1, Linux/Mac: sh)
 - 기존 설정 보존, 중복 방지
 - `--uninstall`로 깨끗하게 제거
+- **참조**: [2026-02-04 대화](.claude/conversations/2026-02-04.md)
+
+### gepetto-verify
+`tags: gepetto, verify, spec, 검증, interview-category`
+`date: 2026-02-04`
+
+- gepetto 17단계 → 19단계 확장 (Step 18: 서브에이전트 검증, Step 19: 결과 보고)
+- `verify-protocol.md` 신규: Explore 서브에이전트 2개 병렬 (기능/품질)
+- `interview-protocol.md`에 5개 구조화 카테고리 추가 (A~E)
+- resume 테이블: ralph+ralphy 파일 존재 시 자동 verify 모드 진입
+- 참고: jh941213/my-claude-code-asset의 SPEC 워크플로우
+- **참조**: [2026-02-04 대화](.claude/conversations/2026-02-04.md)
+
+### explain-skill
+`tags: explain, learning-harness, 비유, mermaid, 코드설명`
+`date: 2026-02-04`
+
+- `/explain @file.ts` 또는 `/explain "기능명"`으로 호출
+- 3단계 설명: 한 줄 요약 + 실제 비유 + 왜 필요한가
+- Mermaid 다이어그램으로 핵심 흐름 시각화
+- 파일 단위 / 기능 단위 둘 다 지원
+- 참고: jh941213/my-claude-code-asset의 junior-mentor 패턴
 - **참조**: [2026-02-04 대화](.claude/conversations/2026-02-04.md)
 
 ### multi-ai-tools
