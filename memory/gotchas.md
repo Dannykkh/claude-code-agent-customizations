@@ -88,6 +88,16 @@
 - Linux/Mac `tail -n N`은 `lseek` 사용하여 이미 효율적 → 수정 불필요
 - **교훈**: PowerShell과 Unix 도구의 동작 방식이 다름, 대용량 파일 처리 시 항상 확인
 
+### memory-explosion, install-log, MEMORY.md, 쓰레기데이터
+`tags: memory-explosion, install-log, MEMORY.md, 쓰레기데이터`
+`date: 2026-03-08`
+`source: claude`
+
+- **문제**: MEMORY.md에 install 출력 로그(400줄)가 통째로 저장되어 성능 경고 발생
+- **원인**: `source:` 필드에 로그 텍스트가 들어감 (구조화된 항목이 아닌 raw 출력)
+- **해결**: `/memory-compact` 스킬 생성 + CLAUDE.md 규칙에 크기 가드(100줄/5KB) 추가
+- **예방**: MEMORY.md에는 인덱스만, 상세 내용은 `memory/*.md`로, 로그/출력은 절대 저장 금지
+
 ### orchestrator-mcp, dependency-missing, node-modules, handshake, install-bat, install-sh
 `tags: orchestrator-mcp, dependency-missing, node-modules, handshake, install-bat, install-sh`
 `date: 2026-02-19`
