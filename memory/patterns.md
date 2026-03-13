@@ -189,3 +189,12 @@
 - Codex는 Claude처럼 custom slash command registry를 직접 제공하지 않을 수 있으므로, Claude 호환 호출명은 global `~/.codex/AGENTS.md` 규칙으로 `/skill-name`을 explicit skill invocation으로 해석하게 만드는 방식이 필요.
 - `skills/codex-mnemo/templates/agents-md-rules.md`에 alias 매핑(`/chronos`→`auto-continue-loop`, `/agent-team`→`agent-team`, exact match `/seo-audit` 등)을 넣고 `node skills/codex-mnemo/install.js`로 재주입하면 새 Codex 프로세스에서 매핑이 반영된다.
 - **참조**: [대화 링크](conversations/2026-03-13-codex.md)
+
+### codex-hook-bridge, notify-fanout, hook-parity
+`tags: codex-hook-bridge, notify-fanout, hook-parity`
+`date: 2026-03-13`
+`source: codex`
+
+- Codex는 `notify`만 제공하므로 `skills/codex-mnemo/hooks/codex-hook-bridge.js`가 현재 턴의 session JSONL에서 `apply_patch` 수정 파일을 복원하고, `save-turn.*`에서 `check-new-file`, `protect-files`, `format-code`, `validate-code`, `validate-docs`, `validate-api`를 fan-out 실행하도록 연결.
+- `orchestrator-detector`는 notify 시점으로는 같은 턴 사전 개입이 불가능하므로, `skills/codex-mnemo/templates/agents-md-rules.md`에 오케스트레이터 모드 자동 해석 규칙을 넣어 `workpm`, `pmworker`, `agent-team`, `zeus`를 explicit mode switch로 처리.
+- **참조**: [대화 링크](conversations/2026-03-13-codex.md)
