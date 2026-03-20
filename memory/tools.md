@@ -329,6 +329,23 @@
 - 에이전트 수: 34개 → 35개
 - **참조**: 이 세션 (2026-02-18)
 
+### orchestrator-mcp-리서치, sqlite-wal, 멀티에이전트, 오케스트레이터, 벤치마킹
+`tags: orchestrator-research, sqlite-wal, multi-agent, overstory, agent-orchestrator, mcp-agent-mail`
+`date: 2026-03-20`
+`source: claude`
+
+- **현재 문제**: orchestrator MCP의 state.json이 동시접근에 무방비 (writeFileSync, 락 없음)
+- **업계 트렌드**: SQLite WAL이 표준 → overstory(1.1k⭐), mcp_agent_mail 모두 채택
+- **주요 레퍼런스**:
+  - [overstory](https://github.com/jayminwest/overstory) — SQLite WAL 메일 시스템 (1-5ms), git worktree, tmux, 4단계 충돌 해결
+  - [agent-orchestrator](https://github.com/ComposioHQ/agent-orchestrator) — 4.9k⭐, git worktree 격리, PR 자동화, 플러그인 아키텍처
+  - [Agent-MCP](https://github.com/rinadelph/Agent-MCP) — 1.2k⭐, Knowledge Graph, HTTP+WebSocket
+  - [mcp_agent_mail](https://github.com/Dicklesworthstone/mcp_agent_mail) — FastMCP + SQLite + Git, 에이전트 메일함, 파일 리스
+  - [claude_code_agent_farm](https://github.com/Dicklesworthstone/claude_code_agent_farm) — 20+ 병렬 Claude, tmux
+  - [ccswarm](https://github.com/nwiizo/ccswarm) — Rust, git worktree
+- **개선 방향**: Stdio 유지 (CLI 호환) + state.json → SQLite WAL 전환 + 프로젝트별 네임스페이스
+- **⚠️ 버전 변화 주의**: Claude/Codex/Gemini 버전 업데이트로 네이티브 기능이 추가되면 외부 오케스트레이터 필요성 감소 가능
+
 ### gemini-mnemo, context-filename, agents-md, gemini-md, afteragent
 `tags: gemini-mnemo, context-filename, agents-md, gemini-md, afteragent`
 `date: 2026-02-14`
