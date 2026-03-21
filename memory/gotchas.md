@@ -118,3 +118,16 @@
 - 즉시 복구: 실행 경로의 `skills/orchestrator/mcp-server`에서 `npm install && npm run build`
 - 재발 방지: `install.bat`, `install.sh`에서 `dist` 존재 여부만 보지 않고 `node_modules/@modelcontextprotocol/sdk/package.json`도 함께 검사하도록 수정
 - **참조**: [대화 링크](conversations/2026-02-19-codex.md)
+
+### qa-test-planner-yaml, orchestrator-install, better-sqlite3, codex-project-root
+`tags: qa-test-planner, yaml, frontmatter, orchestrator, better-sqlite3, codex-project-root`
+`date: 2026-03-21`
+`source: codex`
+
+- `skills/qa-test-planner/SKILL.md` frontmatter는 한 key에 여러 quoted scalar를 쉼표로 이어 써서 YAML 파싱이 깨졌다.
+- 해결: `description`을 folded block scalar (`>`)로 바꿔 Codex 스킬 로더가 정상 파싱하도록 수정했다.
+- Codex용 `orchestrator`는 `dist`와 MCP SDK만 확인하고 등록해 `better-sqlite3`가 빠진 설치본에서도 handshake 실패가 재발할 수 있었다.
+- 해결: `install.bat`, `install.sh`에서 `node_modules/better-sqlite3/package.json`까지 확인해 누락 시 재설치/재빌드하도록 강화했다.
+- 추가로 전역 Codex 등록 시 `ORCHESTRATOR_PROJECT_ROOT`를 설치 디렉터리로 고정하던 동작을 제거해, 런타임이 현재 워크스페이스 기준으로 동작하게 맞췄다.
+- 즉시 복구 절차: 실행 경로의 `skills/orchestrator/mcp-server`에서 `npm install && npm run build` 후 `codex mcp remove/add orchestrator`
+- **참조**: [대화 링크](conversations/2026-03-21-codex.md)
