@@ -211,3 +211,17 @@
 - codex-hook-bridge.js가 turn 끝에 모든 변경 파일을 검증하지만, 이미 일이 끝난 사후 검증
 - 사용자가 `.env`나 `credentials.json`을 수정해도 차단되지 않음 (경고만)
 - mitigation 불가능 — Codex CLI 자체 한계
+
+### jsonl-direct-read, conversations-only, mnemo-search-rule
+`tags: mnemo, jsonl, conversations, 검색룰, negative-guard, source-of-truth-confusion`
+`date: 2026-04-09`
+`source: claude`
+
+- **함정**: 사용자가 "이전에 ~했었지?"라고 물었을 때, `conversations/*.md`를 grep하지 않고 `~/.claude/projects/**/*.jsonl`을 Read 도구로 직접 읽음
+- **원인 1 (룰 누락)**: 글로벌 CLAUDE.md "과거 대화 검색 규칙"에 `.jsonl` 직접 읽기 금지 가드가 한 줄도 없었음 → fallback으로 raw 파일 까봐도 룰 위반이 아님
+- **원인 2 (잘못된 라벨링)**: `skills/mnemo/SKILL.md`에서 jsonl을 "**Source of truth**"라고 표현 → CLI가 "원본을 봐야 정확하다"고 판단할 유혹
+- **원인 3 (mnemo 역할 오해)**: mnemo는 검색 행위를 수행하지 않음. 검색은 Claude가 CLAUDE.md 규칙을 보고 직접 Grep — 즉 mnemo trigger와 무관
+- **해결**: 3개 CLI 템플릿(claude-md-rules, codex/gemini agents-md-rules)의 검색 규칙 step 6 뒤에 "⚠️ JSONL 직접 읽기 절대 금지" 블록 추가 + SKILL.md L93의 "Source of truth" 표현을 "내부 백업, 직접 읽기 금지"로 정정
+- **올바른 절차**: `conversations/`에서 못 찾으면 → `python skills/mnemo/scripts/reconcile_conversations.py --all` → 재검색 → 그래도 없으면 솔직히 답변
+- **교훈**: "Source of truth" 같은 라벨은 CLI에게 강한 신호. 데이터의 정확성보다 **검색 인터페이스의 단일성**이 중요할 때는 라벨링을 명확히 분리해야 함 (백업 vs 검색대상)
+- **참조**: 이 세션 (2026-04-09)
