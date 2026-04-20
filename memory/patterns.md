@@ -194,10 +194,23 @@
 `tags: codex-hook-bridge, notify-fanout, hook-parity`
 `date: 2026-03-13`
 `source: codex`
+`status: SUPERSEDED`
+`superseded-by: #codex-hook-bridge-managed-hook-allowlist`
 
 - Codex는 `notify`만 제공하므로 `skills/codex-mnemo/hooks/codex-hook-bridge.js`가 현재 턴의 session JSONL에서 `apply_patch` 수정 파일을 복원하고, `save-turn.*`에서 `check-new-file`, `protect-files`, `format-code`, `validate-code`, `validate-docs`, `validate-api`를 fan-out 실행하도록 연결.
+- SUPERSEDED 2026-04-21: retired hook 파일이 `~/.codex/hooks`에 남으면 의도치 않게 실행되는 문제가 있어 managed hook allowlist 방식으로 변경.
 - `orchestrator-detector`는 notify 시점으로는 같은 턴 사전 개입이 불가능하므로, `skills/codex-mnemo/templates/agents-md-rules.md`에 오케스트레이터 모드 자동 해석 규칙을 넣어 `workpm`, `pmworker`, `agent-team`, `zeus`를 explicit mode switch로 처리.
 - **참조**: [대화 링크](conversations/2026-03-13-codex.md)
+
+### codex-hook-bridge-managed-hook-allowlist
+`tags: codex-hook-bridge, notify-fanout, stale-hooks, allowlist`
+`date: 2026-04-21`
+`source: codex`
+`status: CURRENT`
+`supersedes: #codex-hook-bridge-notify-fanout-hook-parity`
+
+- Codex notify bridge는 기본적으로 `check-new-file`, `protect-files`, `validate-api`만 실행한다. `format-code`, `validate-code`, `validate-docs`는 retired/stale 파일이 전역 훅 폴더에 남아도 자동 실행하지 않는다.
+- 필요 시 `CODEX_HOOK_BRIDGE_HOOKS=*` 또는 comma-separated hook 목록으로 명시 opt-in한다.
 
 ### reconcile-pattern, jsonl-source-of-truth, idempotent-backfill
 `tags: reconcile, pattern, jsonl, idempotent, backfill, sidecar-index`

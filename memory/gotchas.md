@@ -212,6 +212,14 @@
 - 사용자가 `.env`나 `credentials.json`을 수정해도 차단되지 않음 (경고만)
 - mitigation 불가능 — Codex CLI 자체 한계
 
+### codex-tui-403-tool-suggest-plugin-spam
+`tags: codex, tui, 403, plugins, tool-suggest, stability`
+`date: 2026-04-21`
+`source: codex`
+
+- `codex-tui.log`가 221MB까지 커지고 `tool_suggestions` 403이 7천 회 이상 쌓이는 현상을 확인했다. Cloudflare challenge HTML이 반복 기록되어 TUI 안정성 저하 후보가 된다.
+- 완화: `~/.codex/config.toml`의 `[features]`에서 `apps = false`, `plugins = false`, `tool_suggest = false`로 끈다. 새 Codex 프로세스부터 적용된다.
+
 ### jsonl-direct-read, conversations-only, mnemo-search-rule
 `tags: mnemo, jsonl, conversations, 검색룰, negative-guard, source-of-truth-confusion`
 `date: 2026-04-09`
