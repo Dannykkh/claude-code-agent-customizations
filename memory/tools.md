@@ -277,7 +277,7 @@
 - 시나리오 입력: claude-qa-scenarios.md (zephermine) / docs/qa/ (qa-writer) / 현장 생성
 - Healer 원인 분류: 셀렉터 불일치, API 경로 오류, 타이밍, 비즈니스 로직, 인프라
 - qa-engineer 판정 기준 적용 (PASS/CONDITIONAL/FAIL)
-- **연관**: qa-writer (시나리오), qa-engineer (판정), qa-test-planner (계획)
+- **연관**: qa-writer (시나리오), qa-engineer (판정), minos (시나리오 생성 + 테스트)
 - **파일**: `skills/qpassenger/SKILL.md` + `references/` 2개 + `commands/` 1개
 - **참조**: 이 세션 (2026-02-09)
 
