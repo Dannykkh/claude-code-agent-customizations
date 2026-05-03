@@ -212,6 +212,27 @@
 - 사용자가 `.env`나 `credentials.json`을 수정해도 차단되지 않음 (경고만)
 - mitigation 불가능 — Codex CLI 자체 한계
 
+### deploy-bat-db-mismatch, exit-5-but-healthy, pg-isready-on-mysql
+`tags: deploymonitor, deploy-bat, db-mismatch, exit-5, mysql, postgres, alembic`
+`date: 2026-04-21`
+`source: claude`
+
+- **증상**: DeployMonitor 배포가 항상 `exit 5`로 실패하지만 컨테이너는 잠시 뒤 healthy로 보임 → 사용자 "왜 실패했지?" 반복
+- **실패 체인**:
+  1. deploy.bat의 `pg_isready` (MySQL 컨테이너에 무조건 실패) → `WAIT_DB` 30회 × 2s = 60s 낭비
+  2. `DB_TIMEOUT` → `goto SKIP_DB` → migration/seed 전부 건너뜀
+  3. 빈 DB로 API 기동 → 초기화 느려 헬스체크 70s 초과 → `exit /b 5`
+  4. 컨테이너는 혼자 복구되어 `docker ps` 보면 정상
+- **진짜 원인**: DB를 Postgres → MySQL로 전환했는데 deploy.bat의 `pg_isready`/`psql` 호출이 잔존. `backend/alembic/versions/*.py`의 `postgresql.UUID`도 함께 남음
+- **해결 (우선순위)**:
+  1. `pg_isready` → `mysqladmin ping -h localhost -u %DB_USER% -p%DB_PASSWORD% --silent`
+  2. `psql ... information_schema WHERE table_schema='public'` → `mysql ... WHERE table_schema='%DB_NAME%'`
+  3. `DB_RETRIES GEQ 30` → `90` (60s → 180s, 멀티테넌트 ALTER 대비)
+  4. Alembic 블록 제거 (MySQL에서 무의미)
+  5. `DB_TIMEOUT` 시 `goto SKIP_DB` 대신 `exit /b 4`로 명시 실패
+- **재발 방지**: `/deploy` 스킬의 Step 2.5 Pre-flight에서 docker-compose DB 이미지 vs deploy.bat DB 명령을 매칭 검증
+- **참조**: `skills/deploymonitor/SKILL.md` Step 2.5, `skills/deploymonitor/memory/gotchas.md`
+
 ### codex-tui-403-tool-suggest-plugin-spam
 `tags: codex, tui, 403, plugins, tool-suggest, stability`
 `date: 2026-04-21`
