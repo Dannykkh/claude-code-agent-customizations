@@ -7,6 +7,7 @@
 ### agents, skills, passive-context, vercel
 `tags: agents, skills, passive-context, vercel`
 `date: 2026-01-31`
+`source: claude`
 
 - **AGENTS.md**: 프레임워크 지식, 코드 생성 규칙 (패시브 = 100% 통과율)
 - **Skills**: 사용자 트리거 워크플로우, 마이그레이션
@@ -16,6 +17,7 @@
 ### memory, conversation, hooks, append, context-tree, response-saving
 `tags: memory, conversation, hooks, append, context-tree, response-saving`
 `date: 2026-02-03`
+`source: claude`
 
 - Before: Stop 훅에서 Claude 2번 호출 (키워드 추출 + 메모리 업데이트)
 - After: Stop 훅 없음, Claude가 대화 중 직접 처리
@@ -31,6 +33,7 @@
 ### synonym, 동의어, search, 확장, memory, grep
 `tags: synonym, 동의어, search, 확장, memory, grep`
 `date: 2026-02-04`
+`source: claude`
 
 - 과거 대화 검색 시 정확한 키워드 매칭 → **동의어/관련어 확장** 검색으로 개선
 - 한↔영 양방향 확장 (예: "병렬 작업" → parallel, orchestrator, pm-worker)
@@ -42,6 +45,7 @@
 ### stop-hook, transcript, save-response, jsonl
 `tags: stop-hook, transcript, save-response, jsonl`
 `date: 2026-02-08`
+`source: claude`
 
 - **변경 이유**: "Claude가 직접 저장"은 실행되지 않음 (수동 지시 무시됨)
 - Stop 훅에서 **AI 호출 없이** transcript JSONL에서 기계적으로 추출
@@ -54,6 +58,7 @@
 ### official-docs, frontmatter, subagent-spec, 공식문서, claude-code-docs
 `tags: official-docs, frontmatter, subagent-spec, 공식문서, claude-code-docs`
 `date: 2026-02-09`
+`source: claude`
 
 - `name` (필수), `description` (필수)
 - `tools`, `disallowedTools`, `model` (sonnet/opus/haiku/inherit)
@@ -64,6 +69,7 @@
 ### agent, skill, fullstack, spring-boot, react, orchestration, flow
 `tags: agent, skill, fullstack, spring-boot, react, orchestration, flow`
 `date: 2026-02-03`
+`source: claude`
 
 - Before: 단일 에이전트 484줄 (규칙+코드 예시 혼재)
 - After: 에이전트(~235줄 규칙/체크리스트) + 스킬(코드 예시 + templates/)

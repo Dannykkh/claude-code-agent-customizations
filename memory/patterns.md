@@ -7,6 +7,7 @@
 ### skill-500, progressive-disclosure, context
 `tags: skill-500, progressive-disclosure, context`
 `date: 2026-01-31`
+`source: claude`
 
 - **500줄 제한**: SKILL.md는 500줄 이하 유지
 - **분리**: 상세 내용은 `templates/` 또는 `references/`로
@@ -16,6 +17,7 @@
 ### naming, kebab-case, folder
 `tags: naming, kebab-case, folder`
 `date: 2026-01-31`
+`source: claude`
 
 - 폴더명 = YAML frontmatter `name` 필드와 일치
 - kebab-case 사용 (예: `python-backend-fastapi`)
@@ -23,6 +25,7 @@
 ### readme, documentation, sync
 `tags: readme, documentation, sync`
 `date: 2026-01-31`
+`source: claude`
 
 - README.md ↔ README-ko.md 동기화
 - AGENTS.md 수정 시 Quick Retrieval Paths 확인
@@ -31,6 +34,7 @@
 ### wrap-up, session, keyword, memory, 장기기억
 `tags: wrap-up, session, keyword, memory, 장기기억`
 `date: 2026-02-04`
+`source: claude`
 
 - `/wrap-up` 슬래시 명령어로 세션 종료 시 실행
 - 키워드 추출 → frontmatter 업데이트
@@ -42,6 +46,7 @@
 ### context-management, 리셋, 세션분리, compact, token
 `tags: context-management, 리셋, 세션분리, compact, token`
 `date: 2026-02-08`
+`source: claude`
 
 - CLAUDE.md에 컨텍스트 관리 가이드 추가
 - 리셋 타이밍: 80-100k 토큰, /compact 3회, 응답 느려질 때
@@ -52,6 +57,7 @@
 ### workflow-chaining, 체이닝, 권장워크플로우, agents
 `tags: workflow-chaining, 체이닝, 권장워크플로우, agents`
 `date: 2026-02-08`
+`source: claude`
 
 - AGENTS.md에 Recommended Workflows 섹션 추가 (P5)
 - 6개 시나리오별 에이전트 체이닝 순서 정의
@@ -72,6 +78,7 @@
 ### coding-mindset, yagni, kiss, 개발원칙, read-first
 `tags: coding-mindset, yagni, kiss, 개발원칙, read-first`
 `date: 2026-02-08`
+`source: claude`
 
 - CLAUDE.md에 "개발 원칙" 섹션 추가 (P5)
 - 3가지 원칙: 주니어 마인드셋, 코드 작성, 의사결정
@@ -81,6 +88,7 @@
 ### dedup, hooks, claude-md, snippet, 중복제거, agents, skills
 `tags: dedup, hooks, claude-md, snippet, 중복제거, agents, skills`
 `date: 2026-02-08`
+`source: claude`
 
 - code-reviewer ↔ security-reviewer 보안 섹션 통합
 - qa-engineer ↔ qa-writer TC 템플릿 중복 제거
@@ -102,6 +110,7 @@
 ### schema-designer, 슬림화, references분리, 500줄
 `tags: schema-designer, 슬림화, references분리, 500줄`
 `date: 2026-02-08`
+`source: claude`
 
 - `database-schema-designer/SKILL.md` 687줄 → 500줄
 - `<details>` 3개 섹션을 `references/`로 분리:
@@ -115,6 +124,7 @@
 ### commands, skills-통합, 삭제, 슬래시명령어
 `tags: commands, skills-통합, 삭제, 슬래시명령어`
 `date: 2026-02-08`
+`source: claude`
 
 - `commands/*.md` 19개 파일 전체 삭제 (-2,745줄)
 - 모든 커맨드는 이미 `skills/*/SKILL.md`로 통합 완료
@@ -135,12 +145,14 @@
 ### 새-결정 ✅ CURRENT
 `tags: 새-결정 ✅ CURRENT`
 `date: 2026-02-19`
+`source: claude`
 
 - **변경 이유**: ...
 
 ### cross-cli-sync 패턴
 `tags: pattern, cross-cli-sync`
 `date: 2026-02-19`
+`source: claude`
 
 - 스킬이나 에이전트 훅 mcp를 변경하면 codex, gemini도 각각에 맞게 변경되어야 함
 - readme, docs 등 사용방법도 잘 작성되어야 함

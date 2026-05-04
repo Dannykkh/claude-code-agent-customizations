@@ -19,12 +19,13 @@
 ├── agents/            # 글로벌 에이전트 (.md 파일)
 ├── hooks/             # 글로벌 훅 (.ps1/.sh/.js)
 ├── projects/          # 프로젝트별 auto-memory
-├── conversations/     # 대화 기록 (mnemo)
-└── handoffs/          # 세션 핸드오프 파일
+└── conversations/     # 대화 기록 (mnemo)
 ```
 
 별도 파일:
 - `~/.claude.json` — 앱 설정 (테마, 통계, 기능플래그). MCP 아님.
+
+> 세션 핸드오프는 글로벌이 아니라 **프로젝트별 `docs/handoffs/`**에 저장됩니다 (Claude/Codex/Gemini 공통).
 
 ---
 

@@ -16,6 +16,7 @@
 ### duplication, skill, agent
 `tags: duplication, skill, agent`
 `date: 2026-01-31`
+`source: claude`
 
 - 새 스킬/에이전트 추가 전 기존 항목과 중복 확인
 - 예: erd-designer는 mermaid-diagrams에 포함 → 삭제됨
@@ -23,6 +24,7 @@
 ### context, token, loading
 `tags: context, token, loading`
 `date: 2026-01-31`
+`source: claude`
 
 - Skills: on-demand 로딩 (트리거 시에만)
 - AGENTS.md: 항상 로드 → 핵심만 압축
@@ -31,6 +33,7 @@
 ### doc-sync-checklist ❌ SUPERSEDED
 `tags: doc-sync-checklist, readme, agents-md, registry, 문서동기화`
 `date: 2026-02-08`
+`source: claude`
 `superseded-by: #cross-cli-sync-checklist`
 
 - 에이전트 전용 체크리스트 → 전체 리소스 + 크로스-CLI로 확장됨
@@ -66,6 +69,7 @@
 ### context-explosion, team-review, return-rule, 컨텍스트폭발, zephermine
 `tags: context-explosion, team-review, return-rule, 컨텍스트폭발, zephermine`
 `date: 2026-02-09`
+`source: claude`
 
 - **문제**: 젭마인 Step 9 (5개 에이전트 팀 리뷰) 실행 시 컨텍스트 한도 초과
 - **원인**: 5개 Explore 서브에이전트가 **분석 전문을 return text로 반환** → 메인 대화에 합산되어 폭발
@@ -79,6 +83,7 @@
 ### save-response, context-limit, 미저장, stop-hook, transcript
 `tags: save-response, context-limit, 미저장, stop-hook, transcript`
 `date: 2026-02-09`
+`source: claude`
 
 - **문제**: 컨텍스트 한도 초과 시 대화 내용이 저장되지 않음
 - **분석 결과**: 정상 동작 (버그 아님)
@@ -91,6 +96,7 @@
 ### filestream, seek, tail, 대용량, powershell, get-content
 `tags: filestream, seek, tail, 대용량, powershell, get-content`
 `date: 2026-02-08`
+`source: claude`
 
 - PowerShell `Get-Content -Tail N`은 **파일 전체를 메모리에 로드** 후 마지막 N줄 반환 → 수백MB에서 1분+
 - 해결: `[System.IO.FileStream]::Seek`로 끝에서 청크 단위 역방향 읽기 → 수ms

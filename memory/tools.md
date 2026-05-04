@@ -7,6 +7,7 @@
 ### orchestrator, pm-worker, parallel, mcp
 `tags: orchestrator, pm-worker, parallel, mcp`
 `date: 2026-02-02`
+`source: claude`
 
 - **위치**: `mcp-servers/claude-orchestrator-mcp/`
 - **트리거**: `workpm` (PM), `pmworker` (Worker)
@@ -20,6 +21,7 @@
 ### install-orchestrator, project-install, mcp, hooks
 `tags: install-orchestrator, project-install, mcp, hooks`
 `date: 2026-02-04`
+`source: claude`
 
 - `install-orchestrator.js`: 프로젝트별 Orchestrator 설치/제거
 - 4단계: MCP 빌드 → 훅 복사 → 명령어 복사 → settings.local.json 머지
@@ -31,6 +33,7 @@
 ### zephermine, verify, spec, 검증, interview-category
 `tags: zephermine, verify, spec, 검증, interview-category`
 `date: 2026-02-04`
+`source: claude`
 
 - zephermine 17단계 → 19단계 확장 (Step 18: 서브에이전트 검증, Step 19: 결과 보고)
 - `verify-protocol.md` 신규: Explore 서브에이전트 2개 병렬 (기능/품질)
@@ -42,6 +45,7 @@
 ### explain, learning-harness, 비유, mermaid, 코드설명
 `tags: explain, learning-harness, 비유, mermaid, 코드설명`
 `date: 2026-02-04`
+`source: claude`
 
 - `/explain @file.ts` 또는 `/explain "기능명"`으로 호출
 - 3단계 설명: 한 줄 요약 + 실제 비유 + 왜 필요한가
@@ -53,6 +57,7 @@
 ### excel, xlsx, markdown, openpyxl, 엑셀변환
 `tags: excel, xlsx, markdown, openpyxl, 엑셀변환`
 `date: 2026-02-05`
+`source: claude`
 
 - 엑셀 파일 → 마크다운 테이블 변환 스킬
 - 시트별 `.md` 파일 생성 (효율적 참조)
@@ -64,6 +69,7 @@
 ### external-skills, tdd, debugging, semgrep, wrangler, docx, pdf
 `tags: external-skills, tdd, debugging, semgrep, wrangler, docx, pdf`
 `date: 2026-02-07`
+`source: claude`
 
 - trailofbits는 plugin 구조 → SKILL.md 최상위로 재배치 필요
 - **참조**: [2026-02-07 대화](.claude/conversations/2026-02-07.md)
@@ -71,12 +77,14 @@
 ### install-mcp, mcp-configs, context7, playwright, fetch, sequential-thinking, github
 `tags: install-mcp, mcp-configs, context7, playwright, fetch, sequential-thinking, github`
 `date: 2026-02-07`
+`source: claude`
 
 - **참조**: [2026-02-07 대화](.claude/conversations/2026-02-07.md)
 
 ### mcp, settings-json, claude-json, cli, scope, install-mcp
 `tags: mcp, settings-json, claude-json, cli, scope, install-mcp`
 `date: 2026-02-09`
+`source: claude`
 
 - **변경 이유**: `settings.json`은 `mcpServers` 필드를 지원하지 않음 → `~/.claude.json`에 저장됨
 - **v1 문제**: `fs.writeFileSync`로 `settings.json`에 직접 쓰기 → 스키마 위반으로 무시됨
@@ -96,6 +104,7 @@
 ### zephermine, 젭마인, 제퍼마인, 별칭, naming
 `tags: zephermine, 젭마인, 제퍼마인, 별칭, naming`
 `date: 2026-02-08`
+`source: claude`
 
 - **영어 폴더/스킬명**: `zephermine` (그대로 유지)
 - **한국어 약칭**: **젭마인** (공식), 제퍼마인/제퍼미네도 허용
@@ -105,6 +114,7 @@
 ### zephermine, 심층인터뷰, 디자인비전, 쉬운질문, 5-whys, 벤치마킹
 `tags: zephermine, 심층인터뷰, 디자인비전, 쉬운질문, 5-whys, 벤치마킹`
 `date: 2026-02-07`
+`source: claude`
 
 - **A~E → A~G**: 심층 목표 탐색(A) + 디자인 비전(B) 신규 추가
 - **심층 인터뷰**: 5 Whys, 숨겨진 동기, 성공 정의, 차별화 탐색
@@ -117,6 +127,7 @@
 ### agent-teams, experimental, opus-4.6, settings
 `tags: agent-teams, experimental, opus-4.6, settings`
 `date: 2026-02-07`
+`source: claude`
 
 - 실험적 기능으로 처음 활성화한 기록
 - **참조**: [2026-02-07 대화](.claude/conversations/2026-02-07.md)
@@ -124,6 +135,7 @@
 ### agent-teams-v2, teammate-mode, delegate, plan-approval, tmux, split-panes
 `tags: agent-teams-v2, teammate-mode, delegate, plan-approval, tmux, split-panes`
 `date: 2026-02-09`
+`source: claude`
 
 - `in-process` (기본): 메인 터미널, Shift+Up/Down 전환
 - `tmux`/`split panes`: 각 팀원 별도 패널 (tmux/iTerm2 필요)
@@ -141,6 +153,7 @@
 ### agent-team-skill, wave, 병렬실행, zephermine-sections, native-agent-teams
 `tags: agent-team-skill, wave, 병렬실행, zephermine-sections, native-agent-teams`
 `date: 2026-02-09`
+`source: claude`
 
 - zephermine 섹션(sections/) 기반 네이티브 Agent Teams 병렬 실행 스킬
 - **6단계 워크플로우**: Parse → Wave Plan → Create Tasks → Execute Waves → Verify → Report
@@ -158,6 +171,7 @@
 ### github-research, 유사프로젝트, 벤치마킹, research
 `tags: github-research, 유사프로젝트, 벤치마킹, research`
 `date: 2026-02-09`
+`source: claude`
 
 - 젭마인 리서치 단계에 GitHub 유사 프로젝트 검색 추가
 - Step 4.3: 사용자에게 GitHub 검색 여부 질문
@@ -170,6 +184,7 @@
 ### qa-scenarios, test-scenario, crud, 입출력, e2e, runtime-verification
 `tags: qa-scenarios, test-scenario, crud, 입출력, e2e, runtime-verification`
 `date: 2026-02-09`
+`source: claude`
 
 - Step 8 (Spec): 기능별 Test Scenarios 필수 포함 (정상/에러/엣지)
 - Step 16 (Sections): 각 섹션에 상세 테스트 케이스 테이블
@@ -182,6 +197,7 @@
 ### api-spec, api-drift, 중복api, frontend-caller, 프론트백엔드
 `tags: api-spec, api-drift, 중복api, frontend-caller, 프론트백엔드`
 `date: 2026-02-09`
+`source: claude`
 
 - Step 14 신규: `claude-api-spec.md` 생성 (plan에서 API 엔드포인트 추출)
 - 각 엔드포인트: Method, Path, Request/Response 스키마, Error, Auth, **Frontend Caller**
@@ -197,6 +213,7 @@
 ### multi-ai-domain, codex-gemini, 도메인전문가, team-review, 편향보완, 업무흐름표
 `tags: multi-ai-domain, codex-gemini, 도메인전문가, team-review, 편향보완, 업무흐름표`
 `date: 2026-02-09`
+`source: claude`
 
 - **Phase A**: Claude가 WebSearch로 산업별 기술/솔루션 검색 → `domain-research.md`
 - **Phase B**: 도메인 전문가가 리서치 결과 기반으로 분석 (Codex/Gemini/Claude)
@@ -212,6 +229,7 @@
 ### security-reviewer, owasp, 보안, vulnerability
 `tags: security-reviewer, owasp, 보안, vulnerability`
 `date: 2026-02-08`
+`source: claude`
 
 - jh941213/my-claude-code-asset 벤치마킹으로 security-reviewer 에이전트 신규 생성
 - 4대 카테고리: 인증/권한, 입력검증(OWASP), 데이터보안, 의존성보안
@@ -222,6 +240,7 @@
 ### stitch, stitch-developer, ui-generation, mcp
 `tags: stitch, stitch-developer, ui-generation, mcp`
 `date: 2026-02-08`
+`source: claude`
 
 - Stitch MCP 기반 UI 생성 전문가 에이전트 + 4개 스킬 패키지
 - 에이전트: `agents/stitch-developer.md` (오케스트레이션, 프롬프트 원칙)
@@ -232,6 +251,7 @@
 ### tech-debt, reducing-entropy, 기술부채, detection
 `tags: tech-debt, reducing-entropy, 기술부채, detection`
 `date: 2026-02-08`
+`source: claude`
 
 - reducing-entropy.md에 실행 가능한 기술부채 탐지 체크리스트 추가
 - 기존 철학적 원칙 유지 + 구체적 탐지 항목: console.log, 미사용 import, any 타입, 매직넘버, TODO/FIXME
@@ -241,6 +261,7 @@
 ### backend-performance, n+1, cache, spring, connection-pool
 `tags: backend-performance, n+1, cache, spring, connection-pool`
 `date: 2026-02-08`
+`source: claude`
 
 - backend-spring.md에 Performance Optimization 섹션 추가
 - N+1 방지 (fetch join, @EntityGraph), DB 인덱스 설계, Spring Cache, 페이지네이션 필수, HikariCP 설정
@@ -249,6 +270,7 @@
 ### architect, adr, 아키텍처, 기술스택, 확장성, solid
 `tags: architect, adr, 아키텍처, 기술스택, 확장성, solid`
 `date: 2026-02-08`
+`source: claude`
 
 - jh941213 벤치마킹으로 architect 에이전트 신규 생성 (P4)
 - 6개 섹션: 아키텍처 패턴, 기술 스택 평가, 확장성 전략, SOLID, ADR 템플릿, 에이전트 연동
@@ -259,6 +281,7 @@
 ### postgresql, supabase, rls, pgbouncer, jsonb, gin, gist
 `tags: postgresql, supabase, rls, pgbouncer, jsonb, gin, gist`
 `date: 2026-02-08`
+`source: claude`
 
 - `agents/database-postgresql.md` 신규 생성 (275줄)
 - MySQL 에이전트 기반으로 PostgreSQL/Supabase 전용 차별점 반영
@@ -271,6 +294,7 @@
 ### qpassenger (큐패신저), playwright, healer, fix-until-pass, e2e
 `tags: qpassenger, 큐패신저, qa-until-pass, playwright, healer, fix-until-pass, e2e`
 `date: 2026-02-09`
+`source: claude`
 
 - QA 시나리오 → Playwright 테스트 코드 자동 생성 + fix-until-pass 루프
 - **5단계**: 시나리오 수집 → 코드 생성 → 실행 → Healer Loop (max 5회) → 결과 보고
