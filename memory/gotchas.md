@@ -260,3 +260,12 @@
 - **올바른 절차**: `conversations/`에서 못 찾으면 → `python skills/mnemo/scripts/reconcile_conversations.py --all` → 재검색 → 그래도 없으면 솔직히 답변
 - **교훈**: "Source of truth" 같은 라벨은 CLI에게 강한 신호. 데이터의 정확성보다 **검색 인터페이스의 단일성**이 중요할 때는 라벨링을 명확히 분리해야 함 (백업 vs 검색대상)
 - **참조**: 이 세션 (2026-04-09)
+
+### zeus-cli-auto-continue, chronos, notify-cwd-stdin
+`tags: zeus, claude-code, codex, chronos, notify, auto-continue, cwd, stdin`
+`date: 2026-05-06`
+`source: codex`
+
+- Zeus는 "한 턴 연속 실행" 지시만으로 Phase 0~6 완료가 보장되지 않는다. Claude는 Stop 훅, Codex는 notify 체인을 쓰되 Zeus 시작 시 Chronos 상태를 만들어야 한다.
+- PowerShell notify 체인에서 스크립트 파이프 입력은 `[Console]::In`만으로 안정적으로 읽히지 않을 수 있어 temp payload file 또는 `$input` fallback이 필요하다.
+- **참조**: `skills/zeus/SKILL.md`, `skills/auto-continue-loop/scripts/continue-loop.ps1`, `skills/codex-mnemo/hooks/save-turn.ps1`
